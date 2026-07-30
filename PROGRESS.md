@@ -17,7 +17,12 @@
   - [x] 배운 것: week02/NOTES.md
 
 ## 2단계: LLM 앱 핵심 패턴
-- [ ] 3주차 — 멀티턴 챗봇 + 스트리밍
+- [x] **3주차 완료 (2026-07-30)** — 멀티턴 챗봇 + 스트리밍 (chatbot.py)
+  - [x] 1단계: while/input/break 대화 루프 (+대소문자 구분 발견)
+  - [x] 2단계: 기억 없음 버전으로 stateless 체험 (이름 잊어버림)
+  - [x] 3단계: history.append로 기억 구현 (이름 기억 성공) + 토큰 눈덩이 개념
+  - [x] 4단계: stream=True 스트리밍 출력
+  - [x] 배운 것: week03/NOTES.md
 - [ ] 4주차 — 구조화된 출력 (JSON)
 - [ ] 5주차 — 함수 호출 (Tool Use)
 - [ ] 6주차 — 마일스톤 1: MeetingAssistant 요약+할일 자동 추출
