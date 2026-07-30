@@ -4,3 +4,4 @@ __pycache__/
 .env
 week06/*_요약.md
 meeting_*.txt
+week08/db/
