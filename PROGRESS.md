@@ -29,7 +29,13 @@
   - [x] 3단계: format=JSON 스키마로 출력 강제 (부탁→강제)
   - [x] 4단계: for 반복으로 할일 체크리스트 출력
   - [x] 배운 것: week04/NOTES.md
-- [ ] 5주차 — 함수 호출 (Tool Use)
+- [x] **5주차 완료 (2026-07-31)** — Tool Use (toolbot.py)
+  - [x] 1단계: def/return/독스트링 — 함수 정의 첫 경험 (get_current_time, check_disk)
+  - [x] 2단계: 도구 없는 모델의 한계 체험 ("시계를 확인할 수 없습니다")
+  - [x] 3단계: tools 전달 → tool_calls 요청 관찰 (모델은 실행하지 않는다)
+  - [x] 4단계: 요청 실행 + role="tool" 회신 → 실제 디스크 용량으로 답변 성공
+  - [ ] 5단계(보너스): 챗봇 루프 통합 = 미니 에이전트 (선택)
+  - [x] 배운 것: week05/NOTES.md
 - [ ] 6주차 — 마일스톤 1: MeetingAssistant 요약+할일 자동 추출
 
 ## 3단계: RAG
