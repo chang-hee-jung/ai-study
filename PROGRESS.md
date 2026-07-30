@@ -23,7 +23,12 @@
   - [x] 3단계: history.append로 기억 구현 (이름 기억 성공) + 토큰 눈덩이 개념
   - [x] 4단계: stream=True 스트리밍 출력
   - [x] 배운 것: week03/NOTES.md
-- [ ] 4주차 — 구조화된 출력 (JSON)
+- [x] **4주차 완료 (2026-07-31)** — 구조화된 출력 (extract.py)
+  - [x] 1단계: 프롬프트로 JSON 부탁 (f-string 중괄호 이스케이프)
+  - [x] 2단계: json.loads로 dict 변환, 키 접근·체이닝
+  - [x] 3단계: format=JSON 스키마로 출력 강제 (부탁→강제)
+  - [x] 4단계: for 반복으로 할일 체크리스트 출력
+  - [x] 배운 것: week04/NOTES.md
 - [ ] 5주차 — 함수 호출 (Tool Use)
 - [ ] 6주차 — 마일스톤 1: MeetingAssistant 요약+할일 자동 추출
 
