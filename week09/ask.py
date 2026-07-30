@@ -37,7 +37,7 @@ prompt = f"""아래 근거만 사용해서 질문에 답해줘.
 
 # ── 3) 생성: 근거를 보고 답하게 한다 ────────────────────────────
 response = chat(
-    model="qwen2.5:7b",
+    model="qwen2.5:14b",
     messages=[
         {"role": "system", "content": """너는 사내 규정 안내 봇이다.
 반드시 한국어로만 답한다.
