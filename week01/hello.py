@@ -7,3 +7,4 @@ response = chat(
       ],
   )
 print(response.message.content)
+print(response)

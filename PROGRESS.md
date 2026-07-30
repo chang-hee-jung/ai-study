@@ -3,14 +3,12 @@
 > 주차 완료 시 체크. 새 세션에서 Claude가 이 파일을 읽고 이어간다.
 
 ## 1단계: 파이썬 근육 + 첫 API 호출
-- [ ] 1주차 — 환경 세팅 + hello.py
-  - [x] venv 생성, anthropic·google-genai 설치 (2026-07-30)
-  - [x] 교재 결정: Gemini 검토 후 **Ollama 로컬 모델로 최종 결정** (2026-07-30)
-  - [x] Ollama v0.32.5 설치 + qwen2.5:7b 다운로드 + pip install ollama (2026-07-30)
-  - [x] 과제 1: `ollama run`으로 터미널 대화 체험 + qwen/llama 한국어 비교 실험 (2026-07-30)
-  - [x] 과제 2: hello.py 작성 및 실행 성공 (2026-07-30) — IndentationError→404→SyntaxError 에러 3종을 읽고 자력 해결
-  - [ ] 과제 3(확장): response 전체 출력해서 eval_count 찾기
-  - [ ] 배운 것 메모 (week01/NOTES.md)
+- [x] **1주차 완료 (2026-07-30)** — 환경 세팅 + hello.py
+  - [x] venv 생성, 교재 결정(Ollama 로컬), qwen2.5:7b·llama3.1:8b 설치
+  - [x] 과제 1: 터미널 대화 체험 + 두 모델 한국어 비교 (환각 현상 관찰)
+  - [x] 과제 2: hello.py 작성·실행 성공 — IndentationError→404→SyntaxError 자력 해결
+  - [x] 과제 3: response 해부 (eval_count, 토큰 비용 계산 퀴즈 통과)
+  - [x] 배운 것: week01/NOTES.md (Claude 정리 — 사용자는 회고 작성보다 실습 선호)
 - [ ] 2주차 — 문서 요약 CLI (summarize.py)
 
 ## 2단계: LLM 앱 핵심 패턴
