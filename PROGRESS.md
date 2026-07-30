@@ -7,9 +7,10 @@
   - [x] venv 생성, anthropic·google-genai 설치 (2026-07-30)
   - [x] 교재 결정: Gemini 검토 후 **Ollama 로컬 모델로 최종 결정** (2026-07-30)
   - [x] Ollama v0.32.5 설치 + qwen2.5:7b 다운로드 + pip install ollama (2026-07-30)
-  - [ ] 과제 1: `ollama run qwen2.5:7b`로 터미널 대화 체험
-  - [ ] 과제 2: hello.py 작성 및 실행 성공
-  - [ ] 과제 3(확장): response 전체 출력, eval_count 찾기
+  - [x] 과제 1: `ollama run`으로 터미널 대화 체험 + qwen/llama 한국어 비교 실험 (2026-07-30)
+  - [x] 과제 2: hello.py 작성 및 실행 성공 (2026-07-30) — IndentationError→404→SyntaxError 에러 3종을 읽고 자력 해결
+  - [ ] 과제 3(확장): response 전체 출력해서 eval_count 찾기
+  - [ ] 배운 것 메모 (week01/NOTES.md)
 - [ ] 2주차 — 문서 요약 CLI (summarize.py)
 
 ## 2단계: LLM 앱 핵심 패턴
