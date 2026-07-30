@@ -72,5 +72,16 @@
   - [x] read_file로 회의록 요약이 대화 한 마디로
   - [x] 위험 도구(move_file) y/n 승인제 + 거부를 모델에 전달 → 우아한 포기 확인
   - [x] 배운 것: week11/NOTES.md
-- [ ] 12주차 — 마일스톤 3: 멀티스텝 에이전트 ("폴더 정리해줘" 수준 위임)
+- [x] **12주차 완료 (2026-08-03)** — 마일스톤 3: 멀티스텝 에이전트 (agent.py)
+  - [x] if→while: 도구 연쇄 루프 + MAX_ROUNDS + try/except
+  - [x] 1차: 상한 미완성 → "보고≠실제, 검증 필수" / 2차: 중국어 인자 대참사 →
+        도구 방어 설계 + 프롬프트 보강 / 3차: 3라운드 자연 종료 완주
+  - [x] 배운 것: week12/NOTES.md
 - (보류) 서비스화 트랙: FastAPI→웹UI→사내배포 — 실수요 생기면
+
+---
+
+# 🎓 12주 커리큘럼 완주 (2026-07-30 ~ 2026-08-03)
+결과물: hello.py → summarize.py → chatbot.py → extract.py → toolbot.py →
+meeting_report.py(M1) → 임베딩/인덱스 → ask.py(M2) → assistant.py → assistant2.py → agent.py(M3)
+다음 후보: 도구 확장(서버 점검 비서 등), 큰 모델 비교, 서비스화 트랙 부활
