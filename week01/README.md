@@ -6,7 +6,7 @@
 - 토큰 개념 이해
 
 ## 준비 (완료)
-- [x] `C:\Users\s-n\ai-study` + venv (Python 3.14.3)
+- [x] `F:\ai-study` + venv (Python 3.14.3)
 - [x] Ollama 설치 (v0.32.5), `pip install ollama`
 - [x] 모델 다운로드: `qwen2.5:7b`
 
@@ -38,7 +38,7 @@ print(response.message.content)
 
 실행:
 ```powershell
-cd C:\Users\s-n\ai-study
+cd F:\ai-study
 .\venv\Scripts\python week01\hello.py
 ```
 
