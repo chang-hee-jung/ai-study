@@ -9,7 +9,12 @@
   - [x] 과제 2: hello.py 작성·실행 성공 — IndentationError→404→SyntaxError 자력 해결
   - [x] 과제 3: response 해부 (eval_count, 토큰 비용 계산 퀴즈 통과)
   - [x] 배운 것: week01/NOTES.md (Claude 정리 — 사용자는 회고 작성보다 실습 선호)
-- [ ] 2주차 — 문서 요약 CLI (summarize.py)
+- [x] **2주차 완료 (2026-07-30)** — 문서 요약 CLI (summarize.py)
+  - [x] 1단계: 파일 읽기 (open, with, encoding)
+  - [x] 2단계: f-string으로 프롬프트 조립 + 모델 요약
+  - [x] 3단계: sys.argv로 파일명 인자 받기 (argv[0] 자기요약 사건 포함)
+  - [x] 4단계: system 프롬프트로 중국어 섞임·숫자 유실·왜곡 해결, 프롬프트 교체로 할일 추출 변신
+  - [x] 배운 것: week02/NOTES.md
 
 ## 2단계: LLM 앱 핵심 패턴
 - [ ] 3주차 — 멀티턴 챗봇 + 스트리밍
