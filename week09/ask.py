@@ -1,6 +1,7 @@
 # 9주차: 문서 QA 봇 (마일스톤 2) — 검색(RAG) + 생성의 합체
 # 사용법: .\venv\Scripts\python week09\ask.py "질문"
 
+import os
 import sys
 from ollama import chat, embed
 import chromadb
@@ -36,8 +37,19 @@ prompt = f"""아래 근거만 사용해서 질문에 답해줘.
 질문: {question}"""
 
 # ── 3) 생성: 근거를 보고 답하게 한다 ────────────────────────────
+# 14주차: GPU에 올릴 레이어 수를 손으로 지정할 수 있다 (미설정이면 ollama 자동 판정).
+#   14B는 8GB 카드에 다 안 들어가서 일부가 CPU로 간다. 자동 판정은 보수적이라
+#   48개 중 31개만 올렸는데, 38개까지 올리면 27.7% 빨라진다 (week14/gpu_confirm.py).
+#   단 최적값은 PC마다 다르다 — 화면이 VRAM을 쓰는 무iGPU PC에서 38을 쓰면
+#   VRAM이 넘쳐 공유 메모리로 새고 오히려 절반 속도가 된다. 그래서 기본은 자동.
+#   설정법:  $env:ASK_NUM_GPU = "38"     (영구:  setx ASK_NUM_GPU 38)
+options = {}
+if os.environ.get("ASK_NUM_GPU"):
+    options["num_gpu"] = int(os.environ["ASK_NUM_GPU"])
+
 response = chat(
     model="qwen2.5:14b",
+    options=options,
     messages=[
         {"role": "system", "content": """너는 사내 규정 안내 봇이다.
 반드시 한국어로만 답한다.
