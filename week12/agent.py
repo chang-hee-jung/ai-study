@@ -8,10 +8,40 @@
 # 이 파일은 그 반복을 "목표 하나"의 단위로 두고, 바깥에 대화 루프를 씌운 것이다.
 
 import os
+import json
 import shutil
 
 import chromadb
 from ollama import chat, embed
+
+MEMORY_FILE = "week12/memory.json"
+
+
+def to_plain(entry):
+    """ollama Message 객체든 dict든, JSON으로 저장 가능한 dict로 통일한다."""
+    if isinstance(entry, dict):
+        return entry
+    d = {"role": entry.role, "content": entry.content or ""}
+    if entry.tool_calls:
+        d["tool_calls"] = [
+            {"function": {"name": c.function.name, "arguments": dict(c.function.arguments)}}
+            for c in entry.tool_calls
+        ]
+    return d
+
+
+def load_memory() -> list:
+    """지난 실행의 대화(system 프롬프트 제외)를 불러온다. 없으면 빈 대화로 시작."""
+    if os.path.exists(MEMORY_FILE):
+        with open(MEMORY_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+
+def save_memory(conversation: list):
+    """system 프롬프트를 뺀 대화 부분만 저장한다 — 코드에서 프롬프트를 고쳐도 옛 메모리가 덮어쓰지 않도록."""
+    with open(MEMORY_FILE, "w", encoding="utf-8") as f:
+        json.dump([to_plain(m) for m in conversation], f, ensure_ascii=False, indent=2)
 
 
 # ── 도구들 ──────────────────────────────────────────────────────
@@ -81,7 +111,10 @@ SYSTEM = """너는 파일 정리와 사내 규정 안내를 수행하는 개인 
 도구 실행이 거부되면 그 파일은 건너뛰고 계속한다.
 최종 보고 전에는 반드시 list_files로 실제 상태를 다시 확인해, 목표에 적힌 모든 항목이 실제로 처리됐는지 대조한 뒤 보고한다. 처리 못한 항목이 있으면 숨기지 말고 명시한다."""
 
-history = [{"role": "system", "content": SYSTEM}]
+past = load_memory()
+history = [{"role": "system", "content": SYSTEM}] + past
+if past:
+    print(f"[메모리] 이전 대화 {len(past)}개 메시지를 불러왔다")
 
 # ── 모델 에스컬레이션: 목표마다 7B로 시작, 애매하거나 실패하면 14B로 전환 ──
 model = BASE_MODEL
@@ -102,6 +135,7 @@ print("에이전트 비서 시작. 목표나 질문을 말해줘. 끝내려면 /
 while True:
     user_input = input("\n나: ")
     if user_input.lower() == "/bye":
+        print(f"[메모리] {MEMORY_FILE}에 저장됨 — 다음 실행 때 이어서 기억한다")
         break
     history.append({"role": "user", "content": user_input})
 
@@ -170,6 +204,8 @@ while True:
 
     history.append(response.message)  # 최종 답도 이력에 남겨야 다음 턴이 기억한다
     print(f"\n봇: {response.message.content}")
+
+    save_memory(history[1:])  # system 프롬프트(history[0])는 저장하지 않는다
 
     # ── 검증 레이어: 모델의 말이 아니라 코드가 실제 상태로 판정한다 ──
     if last_folder:
