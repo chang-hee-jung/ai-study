@@ -107,8 +107,8 @@ DANGEROUS = {"move_file", "move_by_extension"}
 
 MAX_ROUNDS = 8   # 폭주 방지: 목표 하나당 도구 라운드 상한
 
-BASE_MODEL = "qwen2.5:7b"
-ESCALATION_MODEL = "qwen2.5:14b"
+BASE_MODEL = "qwen3:8b"
+ESCALATION_MODEL = "qwen3:14b"
 
 SYSTEM = """너는 파일 정리와 사내 규정 안내를 겸하는 개인 비서 에이전트다. 반드시 한국어로만 답한다.
 폴더와 파일 이름은 사용자가 말한 한국어 이름을 한 글자도 바꾸지 말고 그대로 사용한다.
