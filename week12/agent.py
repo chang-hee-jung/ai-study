@@ -75,6 +75,22 @@ def move_file(src: str, dst: str) -> str:
     return f"{src} → {dst} 이동 완료"
 
 
+def move_by_extension(folder: str, extensions: list, dest: str) -> str:
+    """folder 바로 아래에서 extensions(예: ['exe','msi'])에 해당하는 파일을 전부 dest 폴더로 옮긴다.
+    설치 파일처럼 확장자만으로 판단해도 되는 대량 정리에 쓴다. dest가 없으면 새로 만든다."""
+    os.makedirs(dest, exist_ok=True)
+    exts = {e.lower().lstrip(".") for e in extensions}
+    moved, total_bytes = [], 0
+    for name in os.listdir(folder):
+        path = os.path.join(folder, name)
+        if os.path.isfile(path) and name.rsplit(".", 1)[-1].lower() in exts:
+            total_bytes += os.path.getsize(path)
+            shutil.move(path, dest)
+            moved.append(name)
+    gb = total_bytes / (1024 ** 3)
+    return f"{len(moved)}개 파일({gb:.2f}GB)을 {dest}로 이동 완료"
+
+
 def search_rules(question: str) -> str:
     """사내 규정(근태, 휴가, 경비, 보안, 장비, 복지)에 대한 질문일 때 관련 규정 조각을 찾아준다."""
     client = chromadb.PersistentClient(path="week08/db")
@@ -85,9 +101,9 @@ def search_rules(question: str) -> str:
     return "\n---\n".join(chunks)
 
 
-TOOLS = [list_files, make_folder, move_file, search_rules]
+TOOLS = [list_files, make_folder, move_file, move_by_extension, search_rules]
 AVAILABLE = {f.__name__: f for f in TOOLS}
-DANGEROUS = {"move_file"}
+DANGEROUS = {"move_file", "move_by_extension"}
 
 MAX_ROUNDS = 8   # 폭주 방지: 목표 하나당 도구 라운드 상한
 
