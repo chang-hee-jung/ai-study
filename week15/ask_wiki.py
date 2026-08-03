@@ -15,6 +15,9 @@ import sys
 import chromadb
 from ollama import chat, embed
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from hybrid import BM25, rrf  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, "week15", "db")
 # v3(헤딩 단위 청킹)이 채택본. 20/21로 v1·v2(19/21)보다 높다.
@@ -37,17 +40,63 @@ SYSTEM = """너는 적설계 시스템(SnowViewer3D) 기술 안내 봇이다.
 숫자, 파일명, 코드 위치는 근거에 적힌 그대로 옮긴다."""
 
 
+# 하이브리드 검색(벡터 + BM25 키워드). 59문항에서 드러난 어휘 충돌 7건 대책.
+#   $env:ASK_HYBRID = "1"
+HYBRID = bool(os.environ.get("ASK_HYBRID"))
+FUSE_N = 20  # 각 검색에서 몇 개씩 뽑아 합칠지
+
+_cache = {}
+
+
+def _collection():
+    # 매 질문마다 PersistentClient를 새로 만들던 것을 캐싱으로 바꿨다
+    if "col" not in _cache:
+        _cache["col"] = chromadb.PersistentClient(path=DB).get_collection(COLLECTION)
+    return _cache["col"]
+
+
+def _all_chunks():
+    """BM25용으로 컬렉션 전체를 한 번만 읽어둔다 (143조각이라 부담 없다)"""
+    if "all" not in _cache:
+        got = _collection().get(include=["documents", "metadatas"])
+        _cache["all"] = (got["ids"], got["documents"], got["metadatas"])
+        _cache["bm25"] = BM25(got["documents"])
+    return _cache["all"]
+
+
 def search(question, top_k=TOP_K):
-    collection = chromadb.PersistentClient(path=DB).get_collection(COLLECTION)
+    col = _collection()
     q = embed(model="bge-m3", input=question)
-    r = collection.query(query_embeddings=q.embeddings, n_results=top_k)
-    return r["documents"][0], r["metadatas"][0], r["distances"][0]
+
+    if not HYBRID:
+        r = col.query(query_embeddings=q.embeddings, n_results=top_k)
+        return r["documents"][0], r["metadatas"][0], r["distances"][0]
+
+    ids, docs, metas = _all_chunks()
+    pos = {cid: i for i, cid in enumerate(ids)}
+
+    r = col.query(query_embeddings=q.embeddings, n_results=FUSE_N)
+    vec_rank = [pos[cid] for cid in r["ids"][0]]
+    dist = {pos[cid]: d for cid, d in zip(r["ids"][0], r["distances"][0])}
+
+    kw_rank = _cache["bm25"].top(question, FUSE_N)
+
+    fused = rrf([vec_rank, kw_rank])[:top_k]
+
+    # 거리 문지기는 벡터 거리로 판정하므로, 벡터가 못 본 조각은 큰 값으로 둔다
+    return (
+        [docs[i] for i in fused],
+        [metas[i] for i in fused],
+        [dist.get(i, 9.9) for i in fused],
+    )
 
 
 def answer(question, top_k=TOP_K):
     chunks, metas, dists = search(question, top_k)
 
-    if dists[0] > MAX_DIST:
+    # 하이브리드에서는 키워드로만 걸린 조각의 벡터 거리가 없다(9.9로 채움).
+    # 1위 거리로 막으면 그런 조각이 통째로 차단되므로, 근거 중 하나라도 가까우면 통과시킨다.
+    if min(dists) > MAX_DIST:
         return "자료에서 찾을 수 없습니다", chunks, metas, dists
 
     context = ""

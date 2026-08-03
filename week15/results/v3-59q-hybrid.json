@@ -1,0 +1,838 @@
+{
+  "label": "v3-59q-hybrid",
+  "top_k": 3,
+  "n": 56,
+  "top1": 45,
+  "topk": 51,
+  "answered": 51,
+  "both": 49,
+  "trap_ok": 3,
+  "rows": [
+    {
+      "q": "지리산 적설값은 몇 시부터 존재하나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.559,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\지리산-현장.md"
+      ],
+      "answer": "지리산의 적설값은 13:00부터 존재합니다 (근거 1, 근거 2, 근거 3)."
+    },
+    {
+      "q": "지리산 data_log.csv의 snowDepth 열은 몇 행이고 상태가 어떤가?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.478,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "raw\\sources.md",
+        "wiki\\entities\\운영기.md"
+      ],
+      "answer": "지리산 적설값 결측 구간(`20260123 data_log.csv`)의 `snowDepth` 열은 2,880행이며 상태가 **전부 빈칸**입니다. (근거 1)"
+    },
+    {
+      "q": "지리산 오전 구간의 3D 표면은 어떻게 그려지나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.862,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ],
+      "answer": "지리산은 01-23 00:00부터 12:59까지 적설값이 없으며, 이 경우 앱은 값을 `0.0`으로 채웁니다. 높이-합성-공식의 절대 높이가 이 값이므로 해당 구간의 3D 표면은 **적설 0**으로 렌더링됩니다 (근거 1)."
+    },
+    {
+      "q": "MatchTolSec 값은 얼마인가?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 2,
+      "answered": true,
+      "dist1": 1.046,
+      "sources": [
+        "purpose.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\엔벨로프-필터.md"
+      ],
+      "answer": "`90`입니다. (근거 2)"
+    },
+    {
+      "q": "프레임 짝짓기에서 타임라인 기준은 어떤 우선순위로 정해지나?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.897,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ],
+      "answer": "프레임 짝짓기에서 기준 시각마다 값을 찾을 때의 우선순위는 다음과 같습니다.\n\n1. surface가 있는 경우, surface의 시각들\n2. surface가 없는 경우, ir의 시각들\n3. 그것도 없는 경우, data의 시각들\n\n(근거 3)"
+    },
+    {
+      "q": "허용 오차를 90초로 정한 이유는?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": false,
+      "dist1": 1.066,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\MainWindow.md"
+      ],
+      "answer": "Surface·ir·data가 각기 다른 주기와 다른 초 오프셋으로 기록되기 때문에, 이를 하나의 타임라인으로 묶기 위해 ±90초 이내 가장 가까운 것을 붙이는 허용 오차로 설정되었습니다. (근거 1)"
+    },
+    {
+      "q": "현장별 surface 초 오프셋은 각각 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": true,
+      "dist1": 0.774,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "*   **예산 현장**: 파일명 초 단위가 `54`로 고정되어 있습니다 (`snow_filtering_20260224_000054`) ([근거 3]).\n*   **지리산**: `:30`입니다 ([근거 1]).\n*   **춘향 현장**: `:38`입니다 ([근거 1])."
+    },
+    {
+      "q": "검증기가 있는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.864,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "purpose.md",
+        "wiki\\entities\\지리산-현장.md"
+      ],
+      "answer": "검증기가 있는 현장은 지리산뿐입니다 (근거 1). 또한, 지리산은 유일하게 검증용 타사 적설계 값을 가진 현장입니다 (근거 3)."
+    },
+    {
+      "q": "춘향 현장은 적설값으로 어느 열을 쓰나?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": false,
+      "dist1": 0.78,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다."
+    },
+    {
+      "q": "예산 현장의 적설값 범위는?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.734,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "예산 현장의 적설값 범위는 0.01 ~ 16.14mm입니다 (근거 1)."
+    },
+    {
+      "q": "31열 로그를 남기는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": true,
+      "dist1": 0.992,
+      "sources": [
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "지리산이 31열 로그를 남깁니다. (근거 1)"
+    },
+    {
+      "q": "춘향 현장의 거리 최대값은 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.746,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\춘향-현장.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다 (근거 1)"
+    },
+    {
+      "q": "적설값 열은 어떻게 찾아내나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.671,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "적설값 열은 다음과 같은 규칙을 통해 찾아집니다.\n\n1.  **이름으로 탐색:** 현장마다 CSV 열 이름이 다르기 때문에, 헤더를 읽어 **이름(명칭)으로** 적설값·플래그·온도 열을 찾습니다 (근거 2).\n2.  **지정 규칙 적용 (우선순위):**\n    *   `\"snowdepth\"`라는 이름과 정확하게 일치하면 해당 열을 **적설값 열로 확정**합니다 (근거 1). `exact` 플래그가 존재하여 이 방식으로 잡힌 경우 이후의 포함-매칭 규칙이 이를 덮지 못합니다.\n    *   만약 정확한 매칭이 되지 않은 상태에서 `\"h사\"` 또는 `\"적설\"`이 열 이름에 포함되어 있다면 적설값 열로 판단합니다 (근거 1).\n3.  **최종 가정:** 만약 위의 규칙을 통해 아무 열도 찾지 못했다면, 첫 번째 열(1번 열)을 적설값으로 가정합니다 (헤더 없는 파일 대비) (근거 1).\n\n**(참고: 데이터 처리 시 규칙)**\n우선순위가 있으며 여러 파일을 병합할 경우, **0이 아닌 값이 0을 이기게** 됩니다 (근거 2). 또한, `if (sv != 0.0 || !valMap.ContainsKey(t)) valMap[t] = sv;`와 같은 규칙에 따라 0이 아닌 값이 들어오면 기존 값을 덮고, 이미 값이 존재하는 상태에서 0이 들어온 경우에는 덮지 않습니다 (근거 1)."
+    },
+    {
+      "q": "여러 파일의 적설값을 병합할 때 규칙은?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.773,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "여러 파일의 적설값을 병합할 때 적용되는 규칙에 대한 내용은 다음과 같습니다.\n\n*   병합 시 **0이 아닌 값이 0을 이긴다**는 규칙이 있습니다. (근거 1)\n*   또한, `data/` 폴더 내의 여러 CSV 파일은 **병합**됩니다. 이때 병합 규칙은 적설값 열 선택 규칙에 따릅니다. (근거 2)"
+    },
+    {
+      "q": "지리산 mm.csv에서 H사 적설이 선택되는 이유는?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.625,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "H사 적설이 선택되는 이유는 `mm.csv` 파일에서 열 순서 때문입니다. 1번 열인 `M사 적설`이 `\"적설\"`을 포함하는 것으로 잡히고, 이어지는 2번 열 `H사 적설`이 `\"h사\"`를 포함하여 다시 잡히게 되는데, 결과적으로 **H사 열이 뒤에 위치하기 때문에** 선택됩니다. 만약 두 열의 순서가 반대라면 M사가 선택될 것입니다 (근거 1). 코드는 H사를 사용하며, 왜 H사인지 그리고 열 순서에 의존해 골라지는지에 대한 규칙은 `적설값-열-선택-규칙`에 있습니다 (근거 2)."
+    },
+    {
+      "q": "적설값 열을 하나도 못 찾으면 어떻게 하나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.618,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "아무 열도 찾지 못하면 1번 열을 적설값으로 가정합니다(헤더 없는 파일 대비). (근거 1)"
+    },
+    {
+      "q": "빈 문자열과 0이 구분되나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.686,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\배포본-경로-해석.md"
+      ],
+      "answer": "빈 문자열과 `0`이 구분되지 않습니다 (근거 1). 이로 인해 \"측정 안 함\"과 \"적설 0mm\"가 같아지는 것이 지리산-적설값-결측의 근본 원인입니다 (근거 1).\n\n또한, 시스템에서 적설값이 없는 경우 `valMap`에 값을 찾을 수 없으면 기본값으로 `0.0`이 들어가며 (\"없으면 0\" 코드 참고) 이에 따라 \"데이터 없음\"과 \"적설 0mm\"가 화면에서 구분되지 않습니다 (근거 2)."
+    },
+    {
+      "q": "ToF 센서로 눈 높이를 직접 재지 못하는 이유는?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.755,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ],
+      "answer": "ToF 센서는 눈을 투과해서 파고들기 때문에, 눈이 쌓인 후 얻는 raw 거리값은 눈 표면이 아닌 눈 속 어딘가를 가리킵니다. 이로 인해 거리를 측정하여 높이로 바꾸려는 가장 직관적인 방법이 눈이 있을 때는 실패하게 됩니다. (근거 2)"
+    },
+    {
+      "q": "절대 높이는 어디서 가져오나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.934,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "purpose.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ],
+      "answer": "절대 높이는 검증 적설수치에서 가져옵니다. 이는 거리로 높이를 정확히 구할 수 없기 때문에 외부 값을 사용하기 위함이며, 눈이 쌓인 상태에서 ToF(Time of Flight)가 눈을 투과(파고듦)하여 raw 거리가 신뢰할 수 없기 때문입니다 (근거 1, 근거 3).\n\n*   절대 높이를 검증 적설수치에서 가져옴 (`높이-합성-공식`)\n*   `MainWindow.xaml.cs:430-434` 주석에 따르면 눈 위 raw 거리는 ToF가 눈을 투과(파고듦)해서 신뢰 불가하며, 절대 높이는 검증 수치로 사용됩니다 (근거 3)."
+    },
+    {
+      "q": "요철은 몇 mm로 정규화하나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 2,
+      "answered": true,
+      "dist1": 1.098,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ],
+      "answer": "판 고정 모양 정규화는 **60mm**로 합니다 (근거 1, 근거 2)."
+    },
+    {
+      "q": "이 앱에서 실측인 것과 시각적 표현인 것은 각각 무엇인가?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.694,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ],
+      "answer": "이 앱에서 실측인 것과 시각적 표현인 것은 다음과 같습니다.\n\n**실측인 것:**\n* 3D 표면의 전체 높이만 실측입니다. (근거 1)\n* 검증된 적설 수치를 기준으로 합니다. (근거 2)\n\n**시각적 표현인 것:**\n* 굴곡과 무늬는 시각적 표현입니다. (근거 1)\n* 판 요철(`ReliefMm`)은 실제 깊이가 아니라 시각적인 입체감입니다. (근거 2)"
+    },
+    {
+      "q": "적설계 시스템의 연간 유지보수 비용은 얼마인가?",
+      "doc": null,
+      "retrieved": null,
+      "rank": null,
+      "answered": true,
+      "dist1": 1.028,
+      "sources": [
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\entities\\MainWindow.md",
+        "purpose.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다."
+    },
+    {
+      "q": "화면에 보이는 Z값은 어떤 세 성분의 합인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.538,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\색-모드.md"
+      ],
+      "answer": "검증 적설수치 + 판 고정 요철 + IR 기반 눈 질감의 합입니다. (근거 1)"
+    },
+    {
+      "q": "SnowTexMm의 크기는 얼마이고 실측인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.923,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ],
+      "answer": "SnowTexMm의 크기는 ±3mm이며, 실측값이 아닌 시각적 입체감 전용입니다. (근거 1)"
+    },
+    {
+      "q": "적설값이 0이면 IR 질감은 어떻게 되나?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "retrieved": true,
+      "rank": 2,
+      "answered": true,
+      "dist1": 0.671,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "적설값(`baseZ`)이 0이면 `snowScale = min(baseZ/10, 1)` 계산 결과가 0이 되어 IR 눈 질감이 꺼지며, 결국 그 구간은 판 고정 요철만 보이고 눈이 없는 것처럼 나타납니다. (근거 1), (근거 2)"
+    },
+    {
+      "q": "판 모양을 위로만 정규화하면 어떤 부작용이 있나?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.866,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ],
+      "answer": "판 모양을 위로만 정규화하기 때문에 판이 항상 주변 지면보다 높게 그려지는 부작용이 있습니다 (파고드는 값이 나오지 않기 때문입니다). (근거 1)"
+    },
+    {
+      "q": "최종 렌더 높이에 곱하는 ZScale 값은 얼마인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.794,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ],
+      "answer": "ZScale은 3.0입니다. 이 값은 시각 과장이자 실제 스케일이 아닙니다. (근거 1)"
+    },
+    {
+      "q": "실제 표면 렌더에는 현재 거리 기반 높이와 판 모양 중 무엇을 쓰나?",
+      "doc": "wiki\\concepts\\거리-높이-변환.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.55,
+      "sources": [
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ],
+      "answer": "실제 표면 렌더에는 판 모양(`판모양`)을 사용합니다. 다만 두 값을 모두 내보내는 상태입니다. (근거 1)"
+    },
+    {
+      "q": "센서는 거리를 주는데 화면에는 높이가 필요하다. 거리가 어떨 때 높은 것인가?",
+      "doc": "wiki\\concepts\\거리-높이-변환.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.476,
+      "sources": [
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ],
+      "answer": "센서가 주는 거리를 화면의 높이로 변환할 때, **가까울수록 높은** 것으로 처리합니다. 기본 계산식은 `높이 = 기준거리 - 현재거리`입니다. (근거 1)"
+    },
+    {
+      "q": "globalRef는 어떻게 정하나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.783,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\SnowAccumulator.md"
+      ],
+      "answer": "`_globalRef`는 초기 유효거리의 98퍼센타일로 정합니다 (근거 3)."
+    },
+    {
+      "q": "baseline은 언제 고정되나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.915,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\SnowAccumulator.md"
+      ],
+      "answer": "Baseline(`\\_base`)는 `SnowMinute` 플래그가 처음으로 1이 되는 순간 그 시점의 값으로 고정됩니다. (근거 1)\n\n```csharp\nif (snowMinute && !_snowStarted) { _snowStarted = true; Array.Copy(_cur, _base, N); }\nelse if (!_snowStarted)          {                      Array.Copy(_cur, _base, N); }\n```"
+    },
+    {
+      "q": "눈이 한 번도 오지 않은 데이터셋에서 baseline은 어떻게 되나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.691,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "`SnowMinute` 플래그가 한 번도 1이 되지 않는 데이터셋(눈 없는 날)에서는 `baseline`이 마지막 프레임까지 계속 갱신됩니다 [근거 1].\n\n또는, 눈이 시작되지 않았을 때(`!_snowStarted`) 매 프레임마다 현재 값(`cur`)으로 `baseline`을 복사하여 갱신합니다 [근거 2]."
+    },
+    {
+      "q": "ToF 노이즈를 잡는 3단계는 무엇인가?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.6,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\entities\\SnowAccumulator.md"
+      ],
+      "answer": "ToF 거리 데이터의 노이즈를 잡는 3단계는 점프 스킵, 디스파이크, 블러입니다. (근거 1)"
+    },
+    {
+      "q": "JUMP_SKIP 값은 얼마이고 무슨 일을 하나?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.824,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ],
+      "answer": "`JUMP_SKIP` 값은 5.0mm이며, 이는 시간축으로 작동하여 한 프레임에 5mm 이상 급변할 경우 해당 값을 **갱신하지 않고 직전 값을 유지**하는 역할을 합니다 (직접 인용).\n\n(근거 1)"
+    },
+    {
+      "q": "점프 스킵 임계값을 5mm로 정한 근거는?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.755,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ],
+      "answer": "점프 스킵 임계값을 5mm로 설정한 근거는 다음과 같습니다.\n첫째, 한 프레임에 5mm 이상 급변하는 것은 실제 눈이 아니라 센서 튐(노이즈)으로 판단하기 때문입니다. 둘째, 실측 프레임 간 변화가 std 2.1mm이므로 5mm는 노이즈의 2배 지점에 잡힌 값입니다. (근거 1)"
+    },
+    {
+      "q": "디스파이크는 위쪽과 아래쪽 중 어느 쪽을 자르나?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.754,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md"
+      ],
+      "answer": "디스파이크는 위쪽만 자릅니다. 아래로 파인 값은 건드리지 않습니다 (근거 3)."
+    },
+    {
+      "q": "뷰어가 읽는 세 폴더는 무엇인가?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": false,
+      "dist1": 0.824,
+      "sources": [
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\SftpCollector.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다"
+    },
+    {
+      "q": "현장 목록은 어느 폴더를 기준으로 만들어지나?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.614,
+      "sources": [
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ],
+      "answer": "현장 목록은 `surface/` 하위 디렉터리에서 나옵니다 (근거 1)."
+    },
+    {
+      "q": "같은 시각에 csv와 csv.gz가 둘 다 있으면 어느 쪽을 쓰나?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "retrieved": true,
+      "rank": 3,
+      "answered": true,
+      "dist1": 0.723,
+      "sources": [
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\데이터-폴더-규약.md"
+      ],
+      "answer": "같은 시각에 둘 다 있으면 압축본이 이깁니다 (근거 3)."
+    },
+    {
+      "q": "파일명에서 시각을 어떻게 뽑아내나?",
+      "doc": "wiki\\concepts\\파일명-시각-규약.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.644,
+      "sources": [
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md"
+      ],
+      "answer": "파일명에서 숫자만 뽑아 앞 14자리를 `yyyyMMddHHmmss`로 해석합니다. 이때 구분자, 접두어, 한글이 섞여 있어도 문제없이 작동하는 관대한 규칙입니다. (근거 1)"
+    },
+    {
+      "q": "파일명에서 시각을 못 읽으면 그 파일은 어떻게 되나?",
+      "doc": "wiki\\concepts\\파일명-시각-규약.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.729,
+      "sources": [
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md"
+      ],
+      "answer": "파일명에서 시각을 읽는 모든 방법(14자리 또는 12자리)이 실패하면 그 파일은 인덱스에서 빠지며 조용히 무시되고 경고가 없습니다. (근거 3)"
+    },
+    {
+      "q": "정점 좌표에서 X를 뒤집는 이유는?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.701,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md",
+        "LLM위키_vs_RAG_정리.md"
+      ],
+      "answer": "X축 반전은 좌표계 처리의 의도적인 조작 중 하나입니다 (근거 2).\n\n구체적인 이유는 다음과 같습니다:\n1.  카메라가 보는 방향과 현장(실제)에서 사람이 보는 좌우를 일치시키기 위함이며, 주석에는 \"현장 좌우 일치\"라고 적혀 있습니다 (근거 1).\n2.  X 성분 부호를 반전하지 않으면 조명이 반대쪽에서 오는 것처럼 보일 수 있기 때문에 필요합니다 (근거 1)."
+    },
+    {
+      "q": "X를 뒤집을 때 법선은 어떻게 처리하고, 안 하면 어떻게 되나?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.863,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md"
+      ],
+      "answer": "X를 뒤집을 때 법선은 그에 맞춘 **법선 부호 반전**이 이루어지며, X 성분 부호가 반전됩니다. (근거 2, 근거 1)\n\n만약 이 처리를 하지 않으면 조명이 반대쪽에서 오는 것처럼 보입니다. (근거 1)"
+    },
+    {
+      "q": "DownStep 값과 그 결과 정점 수는?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.918,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\SnowAccumulator.md"
+      ],
+      "answer": "DownStep 값은 2이며, 이로 인해 메시 다운샘플링 결과는 640x480 → 320x240 = 76,800 정점입니다. (근거 1)"
+    },
+    {
+      "q": "색 모드는 몇 가지이며 어떤 키로 바꾸나?",
+      "doc": "wiki\\concepts\\색-모드.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.796,
+      "sources": [
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\색-모드.md"
+      ],
+      "answer": "색 모드는 총 3가지이며, `V`키로 색상을 순환할 수 있습니다 ([근거 1], [근거 3]). 해당 색상 모드의 이름은 \"IR 사실감\", \"IR 또렷\", \"눈 스타일\"입니다 ([근거 3])."
+    },
+    {
+      "q": "IR 또렷 모드에서 밤 프레임도 환하게 보이는 이유는?",
+      "doc": "wiki\\concepts\\색-모드.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.716,
+      "sources": [
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ],
+      "answer": "프레임마다 min/max를 다시 잡기 때문에 밤 프레임도 환하게 보입니다. [근거 1]"
+    },
+    {
+      "q": "SnowAccumulator는 이름이 누적기인데 왜 누적하지 않나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.624,
+      "sources": [
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "schema.md"
+      ],
+      "answer": "누적하면 노이즈가 폭발하기 때문에 직접 차이 방식을 사용합니다 (근거 1)."
+    },
+    {
+      "q": "SnowAccumulator에 프레임을 어떤 순서로 넣어야 하나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "retrieved": true,
+      "rank": 2,
+      "answered": true,
+      "dist1": 0.649,
+      "sources": [
+        "wiki\\synthesis\\성능-설계.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\MainWindow.md"
+      ],
+      "answer": "SnowAccumulator는 **시각 오름차순**으로 데이터를 먹여야 합니다. 호출자는 `MainWindow`의 백그라운드 루프가 유일하며 상태를 맞추기 위해 항상 이 순서를 지켜야 합니다 (근거 2). SnowAccumulator는 서서히 변화하는 **순서 의존 상태 기계**이므로 임의의 프레임만 계산할 수 없습니다 (근거 1)."
+    },
+    {
+      "q": "파일명과 클래스명이 어긋난 사례가 있나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "retrieved": true,
+      "rank": 2,
+      "answered": true,
+      "dist1": 0.92,
+      "sources": [
+        "schema.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\파일명-시각-규약.md"
+      ],
+      "answer": "네, 있습니다. `EnvelopeFilter.cs`라는 파일에 `SnowAccumulator`라는 클래스가 담겨 있는 경우가 있습니다 (근거 2)."
+    },
+    {
+      "q": "SftpCollector는 지금 실제로 쓰이나?",
+      "doc": "wiki\\entities\\SftpCollector.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": false,
+      "dist1": 0.719,
+      "sources": [
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\entities\\운영기.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다. (근거 3)"
+    },
+    {
+      "q": "SftpCollector는 오래된 폴더를 어떻게 처리하나?",
+      "doc": "wiki\\entities\\SftpCollector.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.656,
+      "sources": [
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\SftpCollector.md"
+      ],
+      "answer": "3일 지난 폴더를 자동 삭제합니다. (근거 1)"
+    },
+    {
+      "q": "지리산 운영기의 펌웨어 버전은?",
+      "doc": "wiki\\entities\\운영기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.708,
+      "sources": [
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ],
+      "answer": "지리산 운영기의 펌웨어 버전은 `V1.0.7 - 2026_01_20`입니다. (근거 2)"
+    },
+    {
+      "q": "예산 현장의 surface 프레임 수와 ir 이미지 장수는?",
+      "doc": "wiki\\entities\\예산-현장.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.681,
+      "sources": [
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "예산 현장의 surface 프레임 수는 288 프레임이고, ir 이미지 장수는 1,440장입니다 (근거 1)."
+    },
+    {
+      "q": "예산 현장만 뽑아 별도 배포본을 만든 이유는?",
+      "doc": "wiki\\entities\\예산-현장.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.727,
+      "sources": [
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "용량 문제로 이 현장만 뽑아 `F:\\SnowViewer3D_예산.zip`(166MB)를 만들었습니다. 전체 3현장은 571MB이며, 이는 카카오톡의 300MB 한도를 넘기 때문입니다 (근거 3)."
+    },
+    {
+      "q": "춘향 현장에서 그래프와 타임라인 범위가 어긋나는 이유는?",
+      "doc": "wiki\\entities\\춘향-현장.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.647,
+      "sources": [
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md"
+      ],
+      "answer": "그래프와 타임라인 범위가 어긋는 이유는 적설 시계열이 3일치인 반면, 이에 대응하는 3D 프레임은 2일치이기 때문입니다 ([근거 1]). 구체적으로 01-23 하루치는 적설 그래프에만 나타나고 이와 일치하는 3D 프레임은 존재하지 않습니다 ([근거 2])."
+    },
+    {
+      "q": "자체포함 단일파일 배포본과 프레임워크 의존 배포본의 크기 차이는?",
+      "doc": "wiki\\entities\\외부-의존성.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.806,
+      "sources": [
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\synthesis\\배포본-경로-해석.md"
+      ],
+      "answer": "자체포함 단일파일 배포본은 181 MB(zip 79MB)이고, 프레임워크 의존 배포본은 8.5 MB입니다. (근거 2)"
+    },
+    {
+      "q": "3D 화면을 좌우로 이동시키려면 어떻게 하나?",
+      "doc": "wiki\\entities\\외부-의존성.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": false,
+      "dist1": 0.98,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\메시-생성.md"
+      ],
+      "answer": "좌측이나 우측으로 3D 화면을 조작할 때는 슬라이더 드래그나 좌우 방향키, Home/End 키를 사용할 수 있습니다 (근거 2)."
+    },
+    {
+      "q": "이 뷰어가 지원하는 최대 동시 접속자 수는 몇 명인가?",
+      "doc": null,
+      "retrieved": null,
+      "rank": null,
+      "answered": true,
+      "dist1": 1.141,
+      "sources": [
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "README.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다."
+    },
+    {
+      "q": "적설계에 쓰인 ToF 센서의 제조사와 모델명은?",
+      "doc": null,
+      "retrieved": null,
+      "rank": null,
+      "answered": true,
+      "dist1": 1.038,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다"
+    }
+  ]
+}
