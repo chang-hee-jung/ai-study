@@ -17,15 +17,17 @@ from ollama import chat, embed
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, "week15", "db")
-# 인덱스 버전을 갈아끼운다:  $env:ASK_COLLECTION = "snow_wiki_v2"
-COLLECTION = os.environ.get("ASK_COLLECTION", "snow_wiki")
+# v3(헤딩 단위 청킹)이 채택본. 20/21로 v1·v2(19/21)보다 높다.
+# 비교용으로 갈아끼우려면:  $env:ASK_COLLECTION = "snow_wiki"
+COLLECTION = os.environ.get("ASK_COLLECTION", "snow_wiki_v3")
 
 TOP_K = int(os.environ.get("ASK_TOP_K", "3"))
 MAX_DIST = 1.2  # 이보다 멀면 "관련 자료 없음". 자료가 바뀌면 재조정 대상
 
-# 모델은 환경변수로 갈아끼운다 - 같은 22문항으로 모델을 비교하기 위해
-#   $env:ASK_MODEL = "gemma4:e4b-it-qat"
-GEN_MODEL = os.environ.get("ASK_MODEL", "qwen2.5:14b")
+# gemma4:e4b-it-qat이 채택본. qwen2.5:14b와 동점인데 VRAM 40%, 5배 빠르고,
+# 실패할 때도 한국어를 지키고 "모른다"고 답한다 (14B는 중국어 이탈 + 출처 조작).
+# 비교용으로 갈아끼우려면:  $env:ASK_MODEL = "qwen2.5:14b"
+GEN_MODEL = os.environ.get("ASK_MODEL", "gemma4:e4b-it-qat")
 
 SYSTEM = """너는 적설계 시스템(SnowViewer3D) 기술 안내 봇이다.
 반드시 한국어로만 답한다.

@@ -1,0 +1,320 @@
+{
+  "label": "e4b-v3-heading",
+  "top_k": 3,
+  "n": 21,
+  "top1": 17,
+  "topk": 18,
+  "answered": 20,
+  "both": 17,
+  "trap_ok": 1,
+  "rows": [
+    {
+      "q": "지리산 적설값은 몇 시부터 존재하나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.559,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ],
+      "answer": "지리산 적설값은 **01-23 13:00**부터 존재합니다. (근거 3) / 또한, `mm.csv`는 **13:00부터**입니다. (근거 2)"
+    },
+    {
+      "q": "지리산 data_log.csv의 snowDepth 열은 몇 행이고 상태가 어떤가?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.478,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\운영기.md",
+        "raw\\sources.md"
+      ],
+      "answer": "지리산 `data_log.csv`의 `snowDepth` 열은 행 수는 2,880이며 상태는 전부 빈칸입니다 (근거 1)."
+    },
+    {
+      "q": "지리산 오전 구간의 3D 표면은 어떻게 그려지나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "retrieved": true,
+      "rank": 3,
+      "answered": true,
+      "dist1": 0.824,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "지리산 현장의 경우 적설값이 01-23 13:00부터 존재하며, 그 이전의 오전 13시간 동안은 값이 없습니다 (근거 1). 이처럼 데이터가 없는 시간대에는 앱이 값을 `0.0`으로 채우게 됩니다 (근거 2, 근거 3).\n\n따라서 해당 구간에서 높이-합성-공식의 절대 높이가 이 값(0)을 따르므로, 지리산 3D 표면은 적설이 0인 상태로 렌더링됩니다 (근거 3)."
+    },
+    {
+      "q": "MatchTolSec 값은 얼마인가?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.786,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "MatchTolSec 값은 90입니다. (근거 1, 근거 2)"
+    },
+    {
+      "q": "프레임 짝짓기에서 타임라인 기준은 어떤 우선순위로 정해지나?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.897,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ],
+      "answer": "타임라인의 우선순위는 다음과 같습니다.\n1. surface가 있으면 surface의 시각들\n2. 없으면 ir의 시각들\n3. 그것도 없으면 data의 시각들\n\n(근거 3)"
+    },
+    {
+      "q": "허용 오차를 90초로 정한 이유는?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": false,
+      "dist1": 1.066,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "제공된 자료에 따르면, surface·ir·data는 각자 다른 주기와 서로 다른 초 오프셋으로 기록되기 때문에 이를 하나의 타임라인으로 묶기 위해 ±90초 이내에서 가장 가까운 값을 붙입니다 [근거 1].\n\n또한 운영기가 매 5분 특정 초(예: `snow_filtering_20260224_000054`)에 데이터를 내보내는 오프셋을 프레임-짝짓기의 `MatchTolSec = 90`이 흡수합니다 [근거 3]."
+    },
+    {
+      "q": "현장별 surface 초 오프셋은 각각 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": true,
+      "dist1": 0.77,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "제공된 자료에 명시된 현장별 surface 초 오프셋은 다음과 같습니다.\n\n*   예산: `:54` (근거 2, 근거 3)\n*   지리산: `:30` (근거 2)\n*   춘향: `:38` (근거 2)"
+    },
+    {
+      "q": "검증기가 있는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.864,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\지리산-현장.md",
+        "purpose.md"
+      ],
+      "answer": "지리산(또는 지리산 현장)입니다. (근거 1)"
+    },
+    {
+      "q": "춘향 현장은 적설값으로 어느 열을 쓰나?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.78,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\춘향-현장.md"
+      ],
+      "answer": "춘향 현장의 데이터 형식은 `DateTime, snowDepth, SnowMinute, Temperature`이며, 적설값 열의 이름은 **snowDepth**입니다.\n\n(근거 3)"
+    },
+    {
+      "q": "예산 현장의 적설값 범위는?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.729,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\예산-현장.md"
+      ],
+      "answer": "예산 현장의 적설값 범위는 0.01 ~ 16.14mm입니다. (근거 2)"
+    },
+    {
+      "q": "31열 로그를 남기는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": true,
+      "dist1": 0.992,
+      "sources": [
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\지리산-현장.md"
+      ],
+      "answer": "31열 로그를 남기는 현장은 지리산입니다 (근거 1)."
+    },
+    {
+      "q": "춘향 현장의 거리 최대값은 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.746,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ],
+      "answer": "춘향 현장의 거리 최대값은 미측정입니다. (근거 3)"
+    },
+    {
+      "q": "적설값 열은 어떻게 찾아내나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.592,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "적설값 열을 찾는 방법은 다음과 같습니다.\n\n*   현장마다 CSV 헤더 이름이 다르기 때문에 **이름으로** 적설값을 찾습니다 (근거 1).\n*   헤더 판정 시, 다음 조건을 확인합니다 (근거 2):\n    *   값이 `\"snowdepth\"`와 정확히 일치하면 해당 열을 플래그로 지정하며 **정확 매칭 확정**됩니다.\n    *   `\"snowdepth\"`가 확정되지 않은 상태에서 이름에 `\"h사\"` 또는 `\"적설\"`이 포함되어 있으면 적설값 열로 지정합니다 (근거 2).\n    *   위의 조건으로도 아무 열도 찾지 못할 경우, 1번 열을 적설값으로 가정합니다 (근거 2).\n\n또한 다음 규칙에 따라 값을 처리합니다 (근거 1, 근거 2):\n\n*   여러 파일을 병합하며 우선순위를 적용하고 **0이 아닌 값이 0을 이깁니다** (근거 1).\n*   적설값(sv)이 0.0이 아니거나 기존에 해당 시각(t)의 값이 없을 때만 `valMap[t] = sv`로 값을 할당하며, 0은 이미 값이 있으면 덮지 않습니다 (근거 2).\n\n참고로, `\"적설\"` 포함 규칙과 `\"h사\"` 포함 규칙 사이에는 우선순위가 정의되어 있지 않습니다 (근거 3)."
+    },
+    {
+      "q": "여러 파일의 적설값을 병합할 때 규칙은?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.773,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\데이터-폴더-규약.md"
+      ],
+      "answer": "여러 파일의 적설값을 병합하는 규칙은 다음과 같습니다.\n\n*   현장마다 CSV 열 이름이 다르기 때문에 헤더를 읽어 **이름으로** 적설값, 플래그, 온도를 찾습니다. (근거 1)\n*   우선순위가 있으며, 여러 파일을 병합할 때 **0이 아닌 값이 0을 이깁니다.** (근거 1)\n*   `data/` 폴더의 여러 CSV는 병합되며, 그 병합 규칙은 '적설값-열-선택-규칙'을 따릅니다. (근거 3)"
+    },
+    {
+      "q": "지리산 mm.csv에서 H사 적설이 선택되는 이유는?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.625,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "`2026_01_23_mm.csv`에서 H사 적설이 선택되는 이유는 H사 열이 M사 열보다 뒤에 있기 때문입니다. (근거 1)"
+    },
+    {
+      "q": "적설값 열을 하나도 못 찾으면 어떻게 하나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.618,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ],
+      "answer": "아무 열도 찾지 못하면 1번 열을 적설값으로 가정합니다(헤더 없는 파일 대비). (근거 1)"
+    },
+    {
+      "q": "빈 문자열과 0이 구분되나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.686,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\synthesis\\배포본-경로-해석.md"
+      ],
+      "answer": "빈 문자열과 `0`은 구분되지 않습니다. 둘 다 `valMap`에 값을 넣지 못하거나 0을 넣어, \"측정 안 함\"과 \"적설 0mm\"가 같아지는 문제가 발생합니다. 이는 지리산-적설값-결측의 근본 원인입니다 (근거 1)."
+    },
+    {
+      "q": "ToF 센서로 눈 높이를 직접 재지 못하는 이유는?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.588,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\엔벨로프-필터.md"
+      ],
+      "answer": "ToF 센서는 눈을 투과하여 파고들기 때문에, 눈이 쌓인 후의 raw 거리값은 눈 표면이 아닌 눈 속 어딘가를 가리킵니다. 따라서 거리를 재서 높이를 측정하는 가장 직관적인 방법이 눈이 있을 때 바로 무너지게 됩니다 (근거 1).\n\n더 구체적으로는 `MainWindow.xaml.cs:430-434`에 주석으로 명시된 바와 같이, \"눈 위 raw 거리는 ToF가 눈을 투과(파고듦)해서 신뢰 불가\"합니다 (근거 2)."
+    },
+    {
+      "q": "절대 높이는 어디서 가져오나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.934,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "purpose.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ],
+      "answer": "절대 높이는 검증 적설수치에서 가져옵니다 (근거 1). 거리를 통해 높이를 구할 수 없기 때문에 외부 값을 사용합니다 (근거 1). 또한, 기준면 중 `baseline`은 눈 시작 시점의 시간적 기준이며 투과가 없던 마지막 순간의 판 모양을 보존하는 역할을 합니다 (근거 1, 근거 3)."
+    },
+    {
+      "q": "요철은 몇 mm로 정규화하나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": false,
+      "rank": null,
+      "answered": true,
+      "dist1": 0.747,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ],
+      "answer": "요철은 `ReliefMm = 60`으로 설정되어 있습니다 (근거 1). 다만, 이 60mm가 실제 판 요철의 물리적 크기와 어떤 관계인지에 대한 기록이 없고 어떻게 정해졌는지 (\"밋밋하면 올려라\"는 주석만 있음)도 명확하지 않으며 현장마다 달라야 하는지 미정입니다 (근거 1)."
+    },
+    {
+      "q": "이 앱에서 실측인 것과 시각적 표현인 것은 각각 무엇인가?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "retrieved": true,
+      "rank": 1,
+      "answered": true,
+      "dist1": 0.694,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "README.md"
+      ],
+      "answer": "*   실측인 것은 **3D 표면의 전체 높이**입니다.\n*   시각적 표현인 것은 **굴곡과 무늬**입니다.\n\n(근거 1)"
+    },
+    {
+      "q": "적설계 시스템의 연간 유지보수 비용은 얼마인가?",
+      "doc": null,
+      "retrieved": null,
+      "rank": null,
+      "answered": true,
+      "dist1": 1.028,
+      "sources": [
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\entities\\지리산-현장.md",
+        "purpose.md"
+      ],
+      "answer": "자료에서 찾을 수 없습니다."
+    }
+  ]
+}

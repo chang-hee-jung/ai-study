@@ -28,8 +28,17 @@ MIN_LEN = 20  # 이보다 짧은 조각(제목 줄 등)은 버린다
 
 # v2 = 링크 노이즈 처리. 기준선(v1)과 비교하려고 별도 컬렉션으로 굽는다.
 #   .\venv\Scripts\python.exe week15\build_wiki_index.py v2
-V2 = len(sys.argv) > 1 and sys.argv[1] == "v2"
-COLLECTION = "snow_wiki_v2" if V2 else "snow_wiki"
+VARIANT = sys.argv[1] if len(sys.argv) > 1 else "v1"
+V2 = VARIANT in ("v2", "v3")  # v3도 링크 처리는 그대로 쓴다
+V3 = VARIANT == "v3"  # 헤딩 단위로 묶기
+COLLECTION = {"v1": "snow_wiki", "v2": "snow_wiki_v2", "v3": "snow_wiki_v3"}[VARIANT]
+
+# v3: 같은 헤딩(## / ###) 아래 문단들을 한 조각으로 묶는다.
+# Q5가 안 풀린 원인 - 요약문("우선순위대로 정해진다")과 실제 목록(1.surface 2.ir 3.data)이
+# 빈 줄로 갈려 다른 조각이 됐고, 질문과 가장 비슷한 건 요약문 쪽이었다.
+# 절이 길면 이 크기에서 끊되, 끊긴 조각에도 헤딩을 다시 붙인다.
+MAX_CHUNK = 900
+HEADING = re.compile(r"^(#{1,6})\s+(.+)$")
 
 # 위키 링크를 걷어낸 뒤 남는 실제 내용이 이보다 적으면 "링크 목록 조각"으로 보고 버린다.
 # (예: "- 비교: [[현장별-비교]], [[지리산-현장]]" -> 남는 건 "- 비교: ," 뿐)
@@ -74,8 +83,30 @@ def collect():
             title = title_of(text, name[:-3])
             files += 1
 
+            heading = ""  # 지금 어느 절 아래인가 (v3에서 조각을 묶는 기준)
+            buf = []  # v3: 같은 절의 문단들을 모아두는 곳
+
+            def flush():
+                """모아둔 문단들을 한 조각으로 확정한다 (v3 전용)"""
+                if not buf:
+                    return
+                head = f"[{title}" + (f" > {heading}]" if heading else "]")
+                chunks.append(head + "\n" + "\n\n".join(buf))
+                metas.append({"source": rel, "title": title, "heading": heading})
+                buf.clear()
+
             for para in text.split("\n\n"):
                 para = para.strip()
+                if not para:
+                    continue
+
+                m = HEADING.match(para.split("\n")[0])
+                if V3 and m and len(para.split("\n")) == 1:
+                    # 헤딩 줄을 만나면 앞 절을 닫고 새 절을 연다
+                    flush()
+                    heading = m.group(2).strip()
+                    continue
+
                 if len(para) < MIN_LEN:
                     continue
 
@@ -88,9 +119,18 @@ def collect():
                     # 그대로 두면 모델이 답변에 위키 문법을 그대로 흉내낸다 (실측됨)
                     para = LINK.sub(r"\1", para)
 
-                # 조각 자체가 어느 문서인지 말하게 한다 (검색 정확도에 직결)
+                if V3:
+                    # 절이 너무 길어지면 여기서 끊는다 (끊긴 뒤에도 헤딩은 다시 붙는다)
+                    if sum(len(p) for p in buf) + len(para) > MAX_CHUNK and buf:
+                        flush()
+                    buf.append(para)
+                    continue
+
+                # v1/v2: 문단 하나가 곧 조각
                 chunks.append(f"[{title}]\n{para}")
                 metas.append({"source": rel, "title": title})
+
+            flush()
 
     return chunks, metas, files
 
@@ -102,7 +142,11 @@ if not chunks:
 
 lengths = [len(c) for c in chunks]
 print(f"위키 경로 : {WIKI}")
-print(f"버전      : {'v2 (링크 목록 제거 + [[링크]] 평문화)' if V2 else 'v1 (기준선)'}")
+print(f"버전      : {VARIANT} " + {
+    "v1": "(기준선: 문단 단위)",
+    "v2": "(링크 목록 제거 + [[링크]] 평문화)",
+    "v3": "(v2 + 헤딩 단위로 묶기)",
+}[VARIANT])
 print(f"문서 수   : {files}개")
 print(f"조각 수   : {len(chunks)}개" + (f"  (링크 목록 {len(dropped)}개 버림)" if V2 else ""))
 print(f"조각 길이 : 평균 {sum(lengths) // len(lengths)}자 / 최소 {min(lengths)} / 최대 {max(lengths)}")
