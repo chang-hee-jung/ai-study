@@ -1,0 +1,970 @@
+{
+  "label": "hybrid",
+  "n": 56,
+  "depth": 10,
+  "collection": "snow_wiki_v3",
+  "hybrid": true,
+  "rerank": false,
+  "recall": {
+    "1": 0.875,
+    "3": 0.9642857142857143,
+    "5": 0.9642857142857143,
+    "10": 1.0
+  },
+  "mrr": 0.9221938775510204,
+  "elapsed": 10.86061954498291,
+  "rows": [
+    {
+      "q": "지리산 적설값은 몇 시부터 존재하나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "README.md"
+      ]
+    },
+    {
+      "q": "지리산 data_log.csv의 snowDepth 열은 몇 행이고 상태가 어떤가?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "raw\\sources.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ]
+    },
+    {
+      "q": "지리산 오전 구간의 3D 표면은 어떻게 그려지나?",
+      "doc": "wiki\\synthesis\\지리산-적설값-결측.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\지리산-현장.md",
+        "README.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "raw\\sources.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ]
+    },
+    {
+      "q": "MatchTolSec 값은 얼마인가?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "rank": 2,
+      "sources": [
+        "purpose.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ]
+    },
+    {
+      "q": "프레임 짝짓기에서 타임라인 기준은 어떤 우선순위로 정해지나?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ]
+    },
+    {
+      "q": "허용 오차를 90초로 정한 이유는?",
+      "doc": "wiki\\concepts\\프레임-짝짓기.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "purpose.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\entities\\지리산-현장.md"
+      ]
+    },
+    {
+      "q": "현장별 surface 초 오프셋은 각각 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "purpose.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\춘향-현장.md"
+      ]
+    },
+    {
+      "q": "검증기가 있는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "purpose.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\synthesis\\성능-설계.md"
+      ]
+    },
+    {
+      "q": "춘향 현장은 적설값으로 어느 열을 쓰나?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "raw\\sources.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\지리산-현장.md"
+      ]
+    },
+    {
+      "q": "예산 현장의 적설값 범위는?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "raw\\sources.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ]
+    },
+    {
+      "q": "31열 로그를 남기는 현장은 어디인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "raw\\sources.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ]
+    },
+    {
+      "q": "춘향 현장의 거리 최대값은 얼마인가?",
+      "doc": "wiki\\comparisons\\현장별-비교.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "purpose.md",
+        "raw\\sources.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ]
+    },
+    {
+      "q": "적설값 열은 어떻게 찾아내나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\MainWindow.md"
+      ]
+    },
+    {
+      "q": "여러 파일의 적설값을 병합할 때 규칙은?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\MainWindow.md",
+        "LLM위키_vs_RAG_정리.md"
+      ]
+    },
+    {
+      "q": "지리산 mm.csv에서 H사 적설이 선택되는 이유는?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "raw\\sources.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ]
+    },
+    {
+      "q": "적설값 열을 하나도 못 찾으면 어떻게 하나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "README.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "purpose.md"
+      ]
+    },
+    {
+      "q": "빈 문자열과 0이 구분되나?",
+      "doc": "wiki\\concepts\\적설값-열-선택-규칙.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\synthesis\\성능-설계.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\SnowAccumulator.md"
+      ]
+    },
+    {
+      "q": "ToF 센서로 눈 높이를 직접 재지 못하는 이유는?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "purpose.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ]
+    },
+    {
+      "q": "절대 높이는 어디서 가져오나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "purpose.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ]
+    },
+    {
+      "q": "요철은 몇 mm로 정규화하나?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "raw\\sources.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ]
+    },
+    {
+      "q": "이 앱에서 실측인 것과 시각적 표현인 것은 각각 무엇인가?",
+      "doc": "wiki\\synthesis\\눈-투과-문제.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "README.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "purpose.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ]
+    },
+    {
+      "q": "화면에 보이는 Z값은 어떤 세 성분의 합인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "purpose.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ]
+    },
+    {
+      "q": "SnowTexMm의 크기는 얼마이고 실측인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "raw\\sources.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\MainWindow.md",
+        "purpose.md"
+      ]
+    },
+    {
+      "q": "적설값이 0이면 IR 질감은 어떻게 되나?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "rank": 2,
+      "sources": [
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ]
+    },
+    {
+      "q": "판 모양을 위로만 정규화하면 어떤 부작용이 있나?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ]
+    },
+    {
+      "q": "최종 렌더 높이에 곱하는 ZScale 값은 얼마인가?",
+      "doc": "wiki\\concepts\\높이-합성-공식.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "purpose.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\눈-투과-문제.md"
+      ]
+    },
+    {
+      "q": "실제 표면 렌더에는 현재 거리 기반 높이와 판 모양 중 무엇을 쓰나?",
+      "doc": "wiki\\concepts\\거리-높이-변환.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ]
+    },
+    {
+      "q": "센서는 거리를 주는데 화면에는 높이가 필요하다. 거리가 어떨 때 높은 것인가?",
+      "doc": "wiki\\concepts\\거리-높이-변환.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\_insights.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "purpose.md"
+      ]
+    },
+    {
+      "q": "globalRef는 어떻게 정하나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\_insights.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "LLM위키_vs_RAG_정리.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "purpose.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md"
+      ]
+    },
+    {
+      "q": "baseline은 언제 고정되나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\MainWindow.md",
+        "LLM위키_vs_RAG_정리.md"
+      ]
+    },
+    {
+      "q": "눈이 한 번도 오지 않은 데이터셋에서 baseline은 어떻게 되나?",
+      "doc": "wiki\\concepts\\기준면-globalRef-baseline.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "purpose.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\entities\\춘향-현장.md"
+      ]
+    },
+    {
+      "q": "ToF 노이즈를 잡는 3단계는 무엇인가?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "purpose.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md"
+      ]
+    },
+    {
+      "q": "JUMP_SKIP 값은 얼마이고 무슨 일을 하나?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "LLM위키_vs_RAG_정리.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "purpose.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ]
+    },
+    {
+      "q": "점프 스킵 임계값을 5mm로 정한 근거는?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\예산-현장.md",
+        "purpose.md"
+      ]
+    },
+    {
+      "q": "디스파이크는 위쪽과 아래쪽 중 어느 쪽을 자르나?",
+      "doc": "wiki\\concepts\\엔벨로프-필터.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\한글-폰트-회피책.md",
+        "purpose.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ]
+    },
+    {
+      "q": "뷰어가 읽는 세 폴더는 무엇인가?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "rank": 6,
+      "sources": [
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "README.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\concepts\\데이터-폴더-규약.md"
+      ]
+    },
+    {
+      "q": "현장 목록은 어느 폴더를 기준으로 만들어지나?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\메시-생성.md",
+        "README.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\적설계-3D-뷰어.md"
+      ]
+    },
+    {
+      "q": "같은 시각에 csv와 csv.gz가 둘 다 있으면 어느 쪽을 쓰나?",
+      "doc": "wiki\\concepts\\데이터-폴더-규약.md",
+      "rank": 3,
+      "sources": [
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\concepts\\메시-생성.md",
+        "LLM위키_vs_RAG_정리.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md"
+      ]
+    },
+    {
+      "q": "파일명에서 시각을 어떻게 뽑아내나?",
+      "doc": "wiki\\concepts\\파일명-시각-규약.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "schema.md",
+        "wiki\\entities\\예산-현장.md"
+      ]
+    },
+    {
+      "q": "파일명에서 시각을 못 읽으면 그 파일은 어떻게 되나?",
+      "doc": "wiki\\concepts\\파일명-시각-규약.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "schema.md",
+        "purpose.md"
+      ]
+    },
+    {
+      "q": "정점 좌표에서 X를 뒤집는 이유는?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md",
+        "LLM위키_vs_RAG_정리.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\MainWindow.md"
+      ]
+    },
+    {
+      "q": "X를 뒤집을 때 법선은 어떻게 처리하고, 안 하면 어떻게 되나?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\concepts\\메시-생성.md",
+        "purpose.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "purpose.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\entities\\MainWindow.md"
+      ]
+    },
+    {
+      "q": "DownStep 값과 그 결과 정점 수는?",
+      "doc": "wiki\\concepts\\메시-생성.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "README.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ]
+    },
+    {
+      "q": "색 모드는 몇 가지이며 어떤 키로 바꾸나?",
+      "doc": "wiki\\concepts\\색-모드.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "raw\\sources.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\concepts\\한글-폰트-회피책.md",
+        "wiki\\entities\\적설계-3D-뷰어.md"
+      ]
+    },
+    {
+      "q": "IR 또렷 모드에서 밤 프레임도 환하게 보이는 이유는?",
+      "doc": "wiki\\concepts\\색-모드.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\synthesis\\눈-투과-문제.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\높이-합성-공식.md",
+        "wiki\\synthesis\\성능-설계.md",
+        "wiki\\concepts\\프레임-짝짓기.md"
+      ]
+    },
+    {
+      "q": "SnowAccumulator는 이름이 누적기인데 왜 누적하지 않나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "schema.md",
+        "wiki\\concepts\\엔벨로프-필터.md",
+        "wiki\\synthesis\\성능-설계.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md",
+        "schema.md"
+      ]
+    },
+    {
+      "q": "SnowAccumulator에 프레임을 어떤 순서로 넣어야 하나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "rank": 2,
+      "sources": [
+        "wiki\\synthesis\\성능-설계.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\entities\\MainWindow.md",
+        "raw\\sources.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\거리-높이-변환.md",
+        "wiki\\concepts\\적설값-열-선택-규칙.md"
+      ]
+    },
+    {
+      "q": "파일명과 클래스명이 어긋난 사례가 있나?",
+      "doc": "wiki\\entities\\SnowAccumulator.md",
+      "rank": 2,
+      "sources": [
+        "schema.md",
+        "wiki\\entities\\SnowAccumulator.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "LLM위키_vs_RAG_정리.md",
+        "schema.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "README.md",
+        "wiki\\concepts\\파일명-시각-규약.md",
+        "schema.md"
+      ]
+    },
+    {
+      "q": "SftpCollector는 지금 실제로 쓰이나?",
+      "doc": "wiki\\entities\\SftpCollector.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\SftpCollector.md",
+        "README.md",
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md"
+      ]
+    },
+    {
+      "q": "SftpCollector는 오래된 폴더를 어떻게 처리하나?",
+      "doc": "wiki\\entities\\SftpCollector.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\comparisons\\폴더구조-불일치.md",
+        "wiki\\entities\\SftpCollector.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\synthesis\\미사용-코드.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\comparisons\\폴더구조-불일치.md"
+      ]
+    },
+    {
+      "q": "지리산 운영기의 펌웨어 버전은?",
+      "doc": "wiki\\entities\\운영기.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\운영기.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "raw\\sources.md",
+        "wiki\\entities\\지리산-현장.md",
+        "README.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\지리산-현장.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\comparisons\\현장별-비교.md"
+      ]
+    },
+    {
+      "q": "예산 현장의 surface 프레임 수와 ir 이미지 장수는?",
+      "doc": "wiki\\entities\\예산-현장.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "wiki\\synthesis\\지리산-적설값-결측.md",
+        "wiki\\entities\\춘향-현장.md",
+        "raw\\sources.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\데이터-폴더-규약.md",
+        "wiki\\concepts\\색-모드.md",
+        "wiki\\concepts\\기준면-globalRef-baseline.md",
+        "wiki\\synthesis\\성능-설계.md"
+      ]
+    },
+    {
+      "q": "예산 현장만 뽑아 별도 배포본을 만든 이유는?",
+      "doc": "wiki\\entities\\예산-현장.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "purpose.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\entities\\운영기.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "purpose.md",
+        "README.md"
+      ]
+    },
+    {
+      "q": "춘향 현장에서 그래프와 타임라인 범위가 어긋나는 이유는?",
+      "doc": "wiki\\entities\\춘향-현장.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\춘향-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\comparisons\\현장별-비교.md",
+        "wiki\\concepts\\프레임-짝짓기.md",
+        "raw\\sources.md",
+        "purpose.md",
+        "wiki\\entities\\MainWindow.md"
+      ]
+    },
+    {
+      "q": "자체포함 단일파일 배포본과 프레임워크 의존 배포본의 크기 차이는?",
+      "doc": "wiki\\entities\\외부-의존성.md",
+      "rank": 1,
+      "sources": [
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\entities\\예산-현장.md",
+        "wiki\\entities\\예산-현장.md",
+        "raw\\sources.md"
+      ]
+    },
+    {
+      "q": "3D 화면을 좌우로 이동시키려면 어떻게 하나?",
+      "doc": "wiki\\entities\\외부-의존성.md",
+      "rank": 7,
+      "sources": [
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\concepts\\메시-생성.md",
+        "wiki\\entities\\적설계-3D-뷰어.md",
+        "wiki\\synthesis\\배포본-경로-해석.md",
+        "wiki\\entities\\MainWindow.md",
+        "wiki\\entities\\외부-의존성.md",
+        "wiki\\comparisons\\그리드-리더-두-갈래.md",
+        "purpose.md",
+        "wiki\\concepts\\높이-합성-공식.md"
+      ]
+    }
+  ]
+}
