@@ -107,8 +107,15 @@ DANGEROUS = {"move_file", "move_by_extension"}
 
 MAX_ROUNDS = 8   # 폭주 방지: 목표 하나당 도구 라운드 상한
 
-BASE_MODEL = "qwen3:8b"
+# 17주차 교체: qwen3:8b는 이 PC에서 정리되어 없어졌는데 코드가 따라가지 않아
+# 조용히 404가 나고 있었다. week17/tool_check.py로 다시 재서 1등을 앉혔다.
+# (도구 호출 4/4, VRAM도 제일 가벼움)
+BASE_MODEL = "gemma4:e4b-it-qat"
 ESCALATION_MODEL = "qwen3:14b"
+
+# 파이프로 실행할 때는 승인 프롬프트에 답할 사람이 없다. 벤치마크처럼
+# 무인으로 돌릴 때만 1로 켠다. 기본은 꺼져 있어야 안전하다.
+AUTO_APPROVE = os.environ.get("AGENT_AUTO_APPROVE") == "1"
 
 SYSTEM = """너는 파일 정리와 사내 규정 안내를 겸하는 개인 비서 에이전트다. 반드시 한국어로만 답한다.
 폴더와 파일 이름은 사용자가 말한 한국어 이름을 한 글자도 바꾸지 말고 그대로 사용한다.
@@ -180,7 +187,7 @@ while True:
                 name = call.function.name
                 args = call.function.arguments
 
-                if name in DANGEROUS:
+                if name in DANGEROUS and not AUTO_APPROVE:
                     ok = input(f"  ⚠ {name}{dict(args)} 실행? (y/n): ")
                     if ok.lower() != "y":
                         print(f"  (거부: {name})")

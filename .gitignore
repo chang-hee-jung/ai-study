@@ -7,3 +7,6 @@ meeting_*.txt
 week08/db/
 week12/memory.json
 week15/db/
+
+# 17주차 비교 실습 산출물 (매번 재생성)
+week17/bench/
