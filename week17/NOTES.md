@@ -53,12 +53,137 @@ VRAM 2.87GB로 제일 가벼운데 제일 정확하다. 에이전트용 모델�
 
 ## 2단계 — 설치와 연결
 
-(진행 후 작성)
+설치는 `-SkipSetup`으로 붙였고, `config.yaml`에 Ollama를 openai-compatible
+provider로 꽂아 바로 돌았다. 첫 응답 13초.
+
+### 첫 실행에서 경고가 떴다
+
+```
+⚠️ Context file AGENTS.md TRUNCATED: 74668 chars exceeds limit of 31457
+```
+
+**내 예상은 틀렸다.** 나는 Ollama 기본 컨텍스트(4096)가 좁아서 터질 거라고
+예고했는데, 그게 아니었다.
+
+진짜 원인은 **실행한 폴더**였다. 설치 소스 폴더
+`AppData\Local\hermes\hermes-agent` 안에서 `hermes chat`을 실행했고,
+그 폴더에 `AGENTS.md`가 있었다. 열어보니 이런 파일이다.
+
+```
+# Hermes Agent - Development Guide
+Instructions for AI coding assistants and developers working on the hermes-agent codebase.
+```
+
+에이전트의 시스템 프롬프트가 아니라 **그 저장소를 고치는 AI에게 주는 개발자
+가이드**다. Hermes는 현재 폴더의 `AGENTS.md`를 프로젝트 컨텍스트로 자동
+로드하는데, 하필 자기 소스 폴더에서 실행하니 자기 개발 문서 76KB를 통째로
+집어삼킨 것이다.
+
+다른 폴더에서 실행해보니 경고가 사라졌다. 원인 확정.
+
+### 여기서 배운 것
+
+**에이전트는 "지금 어느 폴더에 있는가"를 입력으로 삼는다.**
+
+내 `agent.py`에는 그 개념이 아예 없다. 어디서 실행하든 똑같이 동작한다.
+`week12/testbed`를 경로 문자열로 직접 받을 뿐이다.
+
+Hermes는 실행 위치에서 프로젝트 파일을 읽어 그 프로젝트에 맞게 행동한다.
+편리한 만큼, 오늘처럼 의도치 않은 파일을 빨아들이기도 한다. 기능이자 함정이다.
+
+그리고 경고 문구가 좋았다. 잘렸다는 사실 + 한계값 + **해결책 3개**를 같이 줬다.
+내 agent.py는 뭔가 잘못되면 그냥 에러를 뱉거나 조용히 이상하게 동작한다.
 
 ## 3단계 — 해부
 
-(진행 후 작성)
+`AppData\Local\hermes\` 안을 열어 `week12/agent.py`와 대조했다.
+
+| Hermes | 크기/내용 | 내 agent.py의 어디 |
+|---|---|---|
+| `SOUL.md` | 513 바이트 | `SYSTEM` 프롬프트 |
+| `config.yaml` | 1,708줄 / 23개 최상위 키 | 코드에 박힌 상수들 |
+| `state.db` | SQLite + FTS5 + 트라이그램 | `memory.json` |
+| `skills/` | 파일 546개 | **없음** |
+| `sessions/` + DB `sessions` 테이블 | 대화 단위 관리 | **없음** |
+| `logs/`, `hooks/`, `cron/`, `sandboxes/` | | **없음** |
+| `.env` | 24KB (열지 않음) | **없음** |
+
+### 반전 — 내 프롬프트가 4배 크다
+
+| | 크기 |
+|---|---|
+| Hermes `SOUL.md` | 513 바이트 |
+| 내 `SYSTEM` 프롬프트 | **1,972 바이트** |
+
+프레임워크가 더 거대한 프롬프트를 쓸 거라 생각했는데 반대였다.
+
+이유는 **규칙을 어디에 두느냐**의 차이다. 내 agent.py는 "한 글자도 바꾸지
+말라", "에러 나면 반복하지 말라", "보고 전에 검증하라" 같은 규칙을 전부
+프롬프트에 글로 적었다. 모델이 그 글을 매번 읽고 지켜주기를 기대한다.
+
+Hermes는 같은 것들을 **코드와 설정으로 강제한다.** 프롬프트는 정체성만
+짧게 주고, 나머지는 지키지 않을 수 없게 만들어둔다.
+
+프롬프트로 부탁한 규칙은 모델이 안 지키면 그만이다. 코드로 막은 규칙은
+모델이 어길 수가 없다. 12주차에 중국어 폴더명 사고를 프롬프트 보강과
+**도구 방어설계** 둘로 수습했는데, 그때 이미 이 차이를 겪었다.
+
+### tool_loop_guardrails — 같은 발상에 독립적으로 도달했다
+
+```yaml
+tool_loop_guardrails:
+  warnings_enabled: true
+  hard_stop_enabled: false
+  warn_after:
+    exact_failure: 2
+    same_tool_failure: 3
+    idempotent_no_progress: 2
+  hard_stop_after:
+    exact_failure: 5
+    same_tool_failure: 8
+    idempotent_no_progress: 5
+```
+
+내 agent.py에도 있다. `MAX_ROUNDS = 8`, 그리고 같은 도구를 같은 인자로
+불렀는데 또 에러나면 감지하는 `last_error_key`.
+
+**발상이 같다.** 다만 정교함이 다르다.
+
+- 내 것: 라운드 상한 1개 + 에러 반복 1종
+- Hermes: 실패 유형 3종(완전 동일 실패 / 같은 도구 실패 / 진전 없는 반복) ×
+  경고·중단 2단계
+
+그리고 기본값이 `hard_stop_enabled: false`다. **기본은 멈추지 않고 경고만 한다.**
+내 것은 8라운드에서 무조건 끊는다. 어느 쪽이 맞는지는 용도에 달렸지만,
+"멈출지 말지를 설정으로 뺐다"는 게 핵심이다.
+
+### compression — 내게 없는 것
+
+```yaml
+compression:
+  enabled: true   # 자동 컨텍스트 압축
+```
+
+내 `save_memory()`는 대화 전체를 통째로 쌓는다. 오래 쓰면 `memory.json`이
+계속 커지고 결국 컨텍스트 창을 넘겨 터진다. 아직 안 터진 건 오래 안 써봐서다.
+
+Hermes는 이걸 자동 압축으로 푼다. **4단계에서 이걸 훔친다.**
+
+### state.db — 기억을 어떻게 두느냐
+
+내 `memory.json`은 통짜 JSON이다. 불러오려면 전부 읽고, 검색하려면 전부 훑는다.
+
+Hermes는 SQLite에 넣고 그 위에 전문검색 인덱스를 **두 종류** 얹었다.
+
+- `messages_fts` — 일반 FTS5
+- `messages_fts_trigram` — 3글자 단위 인덱스
+
+트라이그램을 따로 둔 이유가 있을 것이다. 한국어처럼 띄어쓰기로 단어가
+깔끔하게 안 갈리는 언어나 부분 일치 검색에서 일반 FTS5는 약하다.
+15주차에 BM25를 한글 2-gram으로 직접 구현했던 것과 같은 문제의식이다.
 
 ## 4단계 — 하나 훔쳐 심기
+
+이식 대상: **컨텍스트 압축**
 
 (진행 후 작성)

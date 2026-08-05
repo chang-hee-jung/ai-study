@@ -146,9 +146,17 @@
   - [x] **agent.py가 지금 안 돈다는 것을 발견** — BASE_MODEL="qwen3:8b"인데 미설치(404).
         모델 이름을 코드 상수로 박으면 조용히 썩는다는 것을 실물로 확인
   - [x] **qwen2.5:7b가 "서울"을 Seoul로 번역해 넘김** — 12주차 중국어 사고와 같은 뿌리
-  - [ ] 2단계: 설치 + Ollama 연결 + 같은 과제 비교
-  - [ ] 3단계: ~/.hermes/ 해부 — 내 agent.py와 대조
-  - [ ] 4단계: 하나 훔쳐서 agent.py에 심기 (후보: 메모리 압축)
+  - [x] **2단계: 설치(-SkipSetup) + Ollama 연결** — config.yaml에 openai-compatible provider로 꽂아 바로 동작
+  - [x] **첫 경고의 원인 규명** — 내 예상(Ollama num_ctx)은 틀렸고, 원인은 **실행한 폴더**였다.
+        설치 소스 폴더 안에서 실행해 그 저장소의 AGENTS.md(개발자 가이드) 76KB를 통째로 빨아들임.
+        다른 폴더에서 실행하니 경고 사라짐. → 에이전트는 "지금 어느 폴더인가"를 입력으로 삼는다
+  - [x] **3단계: 해부** — SOUL.md / config.yaml(1,708줄) / state.db(SQLite+FTS5+트라이그램) /
+        skills(546파일) / sessions / hooks / cron / sandboxes 를 agent.py와 대조
+  - [x] **반전: 내 SYSTEM 프롬프트(1,972B)가 Hermes SOUL.md(513B)보다 4배 크다.**
+        규칙을 프롬프트로 부탁하느냐(내 것) 코드·설정으로 강제하느냐(Hermes)의 차이
+  - [x] **tool_loop_guardrails = 내 MAX_ROUNDS와 같은 발상에 독립 도달.**
+        다만 실패 3종 x 경고/중단 2단계로 정교하고, 기본이 hard_stop_enabled=false
+  - [ ] 4단계: 컨텍스트 압축을 agent.py에 이식 (compression)
 
 ---
 
