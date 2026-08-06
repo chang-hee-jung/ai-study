@@ -9,6 +9,7 @@
 
 import os
 import json
+import re
 import shutil
 
 import chromadb
@@ -58,6 +59,50 @@ def list_files(folder: str) -> str:
 def leftover_files(folder: str) -> list:
     """폴더 바로 아래 남아있는 파일(하위 폴더 제외) 목록 — 정리가 덜 끝났다는 코드 차원의 증거."""
     return [e for e in os.listdir(folder) if os.path.isfile(os.path.join(folder, e))]
+
+
+def salvage_tool_calls(text: str):
+    """본문에 글로 써버린 도구 호출을 건져낸다.
+
+    모델이 tool_calls 필드가 아니라 본문에 이런 걸 뱉을 때가 있다.
+        ```json
+        { "toolName": "list_files", "arguments": {"folder": "..."} }
+        ```
+    의도도 인자도 맞는데 형식만 틀린 것이라 버리기 아깝다.
+    5회 중 2회가 이것 때문에 아무 일도 못 하고 끝났다.
+
+    필드 이름을 지어내는 경우가 많아(toolName/tool_name/name,
+    arguments/parameters/args) 여러 이름을 다 받아준다.
+    도구 이름이 실제 목록에 있는 것만 통과시킨다.
+    """
+    if not text:
+        return []
+    found = []
+    # 코드블록 안이든 밖이든, 중괄호 덩어리를 훑는다
+    for chunk in re.findall(r"\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", text):
+        try:
+            d = json.loads(chunk)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(d, dict):
+            continue
+        name = next((d[k] for k in ("toolName", "tool_name", "name", "tool")
+                     if isinstance(d.get(k), str)), None)
+        args = next((d[k] for k in ("arguments", "parameters", "args", "input")
+                     if isinstance(d.get(k), dict)), None)
+        if name in AVAILABLE and args is not None:
+            found.append({"name": name, "args": args})
+    return found
+
+
+class Salvaged:
+    """건져낸 호출을 ollama의 tool_call과 같은 모양으로 감싼다."""
+    class _F:
+        def __init__(self, name, args):
+            self.name, self.arguments = name, args
+
+    def __init__(self, name, args):
+        self.function = Salvaged._F(name, args)
 
 
 def world_state(folder):
@@ -172,10 +217,11 @@ SYSTEM = """너는 파일 정리와 사내 규정 안내를 겸하는 개인 비
 현직 인물 등)처럼 학습 시점 이후 바뀌었을 수 있는 내용은 "학습 데이터 기준이라 최신 정보가
 아닐 수 있다"고 먼저 밝히고 답한다.
 
-도구를 호출하기 전, 매번 다음을 스스로 단계별로 따져본다:
-1. 지금까지 도구 결과에서 실제로 확인된 사실이 무엇인가 (추측하지 않는다)
-2. 이번에 쓸 도구의 인자가 사용자가 말한 한국어 이름과 글자 하나까지 일치하는가
-3. 직전 라운드에서 에러가 있었다면, 같은 호출을 반복하는 것은 아닌가
+도구를 호출할 때 지키는 것:
+- 도구 결과로 확인된 사실만 쓴다. 추측하지 않는다.
+- 인자는 사용자가 말한 한국어 이름과 글자 하나까지 일치시킨다.
+- 직전에 에러가 난 호출을 그대로 반복하지 않는다.
+계획이나 점검 과정을 글로 쓰지 말고, 바로 도구를 호출한다.
 
 목표를 받으면: 먼저 현재 상태를 도구로 확인하고, 위 점검을 거쳐 계획을 세우고, 도구를 차례로 사용해 완료한다.
 도구에서 에러가 나면 같은 호출을 반복하지 말고, list_files로 현재 상태를 다시 확인한 뒤 계획을 수정한다.
@@ -229,7 +275,19 @@ while True:
 
     # ── 에이전트 루프: 도구 요청이 없어질 때까지 반복 ────────────────
     while rounds < HARD_CEILING:
-        if response.message.tool_calls:
+        calls = response.message.tool_calls
+        if not calls:
+            # 도구 호출 필드가 비었어도 본문에 글로 써놨을 수 있다.
+            rescued = salvage_tool_calls(response.message.content)
+            if rescued:
+                print(f"  [건져냄] 본문에 글로 쓴 도구 호출 {len(rescued)}개를 살렸다")
+                calls = [Salvaged(r["name"], r["args"]) for r in rescued]
+                # 다음 턴에 같은 실수를 반복하지 않도록 형식을 일러준다
+                history.append({"role": "user", "content":
+                                "[시스템 경고] 도구를 본문에 JSON으로 쓰지 말고 "
+                                "도구 호출 기능으로 직접 호출하라."})
+
+        if calls:
             rounds = rounds + 1
             watch = watch_folder          # 이번 라운드 내내 같은 폴더를 본다
             before = world_state(watch)
@@ -237,7 +295,7 @@ while True:
             print(f"\n── 라운드 {rounds} (모델: {model}) ──")
             history.append(response.message)
 
-            for call in response.message.tool_calls:
+            for call in calls:
                 name = call.function.name
                 args = call.function.arguments
 
