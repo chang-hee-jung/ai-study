@@ -60,6 +60,18 @@ def leftover_files(folder: str) -> list:
     return [e for e in os.listdir(folder) if os.path.isfile(os.path.join(folder, e))]
 
 
+def world_state(folder):
+    """폴더 트리의 스냅샷. 이게 변하면 진도가 나간 것이다.
+
+    "진도"를 모델의 말이 아니라 디스크로 판정하기 위한 것이다.
+    모델이 아무리 열심히 설명해도 트리가 그대로면 진도는 0이다.
+    """
+    if not folder or not os.path.isdir(folder):
+        return None
+    return tuple((r, tuple(sorted(d)), tuple(sorted(f)))
+                 for r, d, f in os.walk(folder))
+
+
 def make_folder(path: str) -> str:
     """새 폴더를 만든다. 이미 있으면 그냥 넘어간다. path는 'week12/testbed/문서' 같은 경로."""
     os.makedirs(path, exist_ok=True)
@@ -77,8 +89,17 @@ def move_file(src: str, dst: str) -> str:
 
 def move_by_extension(folder: str, extensions: list, dest: str) -> str:
     """folder 바로 아래에서 extensions(예: ['exe','msi'])에 해당하는 파일을 전부 dest 폴더로 옮긴다.
-    설치 파일처럼 확장자만으로 판단해도 되는 대량 정리에 쓴다. dest가 없으면 새로 만든다."""
-    os.makedirs(dest, exist_ok=True)
+    설치 파일처럼 확장자만으로 판단해도 되는 대량 정리에 쓴다.
+    dest는 미리 make_folder로 만들어져 있어야 한다."""
+    # 원래는 os.makedirs(dest, exist_ok=True) 였다. 그런데 17주차 실험에서
+    # 모델이 경로에서 'bench'를 빠뜨려 'week17/mine/사진'을 넘겼는데,
+    # 이 줄이 그 폴더를 새로 만들어버려 에러 없이 엉뚱한 곳으로 옮겼다.
+    # move_file에는 12주차 사고 뒤 같은 방어를 넣었는데 이 도구는 빠져 있었다.
+    if not os.path.isdir(dest):
+        return (f"에러: {dest} 폴더가 존재하지 않는다. "
+                f"list_files로 실제 폴더 이름을 확인하고 make_folder로 먼저 만들어라.")
+    if not os.path.isdir(folder):
+        return f"에러: {folder} 폴더가 존재하지 않는다. list_files로 확인하라."
     exts = {e.lower().lstrip(".") for e in extensions}
     moved, total_bytes = [], 0
     for name in os.listdir(folder):
@@ -105,7 +126,29 @@ TOOLS = [list_files, make_folder, move_file, move_by_extension, search_rules]
 AVAILABLE = {f.__name__: f for f in TOOLS}
 DANGEROUS = {"move_file", "move_by_extension"}
 
-MAX_ROUNDS = 8   # 폭주 방지: 목표 하나당 도구 라운드 상한
+# ── 폭주 방지 ─────────────────────────────────────────────────
+# 원래는 MAX_ROUNDS = 8 하나로 잘랐다. 그런데 17주차 비교 실습에서
+# 실수를 한 번도 안 한 에이전트가 8라운드에서 잘렸다.
+#   1(조회) + 3(폴더 생성) + 4(이동) = 8   ← 파일 3개 남기고 강제 종료
+# 라운드는 "얼마나 오래 걸리는가"이지 "잘못 가고 있는가"가 아니다.
+# 상한이 건강한 진행을 벌한 것이다.
+#
+# Hermes의 tool_loop_guardrails를 보고 기준을 바꿨다. 라운드가 아니라
+# 병적인 신호 세 가지를 센다. 진도가 나가면 카운터를 0으로 되돌린다.
+#   exact_failure     같은 도구를 같은 인자로 불러서 또 실패
+#   same_tool_failure 같은 도구가 인자를 바꿔가며 계속 실패
+#   no_progress       도구를 불렀는데 폴더 상태가 그대로
+WARN_AT = {"exact_failure": 2, "same_tool_failure": 3, "no_progress": 4}
+STOP_AT = {"exact_failure": 5, "same_tool_failure": 8, "no_progress": 8}
+
+# no_progress만 Hermes 기본값(경고 2 / 중단 5)보다 느슨하게 잡았다.
+# 내 SYSTEM 프롬프트가 "최종 보고 전에 list_files로 다시 확인하라"고 시키기
+# 때문이다. 목적지 폴더 3~4개를 훑는 동안은 폴더가 안 변하는 게 정상인데,
+# 2에서 경고하면 올바르게 검증하는 에이전트에게 "조회만 반복하지 말라"고
+# 잔소리하게 된다. 범용 기본값은 내 프롬프트 사정을 모른다.
+
+# 진짜 무한루프에 대비한 최후의 벽. 정상 작업이 여기 닿을 일은 없다.
+HARD_CEILING = 100
 
 # 17주차 교체: qwen3:8b는 이 PC에서 정리되어 없어졌는데 코드가 따라가지 않아
 # 조용히 404가 나고 있었다. week17/tool_check.py로 다시 재서 1등을 앉혔다.
@@ -167,19 +210,30 @@ while True:
         break
     history.append({"role": "user", "content": user_input})
 
-    # 새 목표는 항상 7B(손발)로 새로 시작 — 이전 목표의 에스컬레이션을 물려받지 않는다
+    # 새 목표는 항상 작은 모델로 새로 시작 — 이전 목표의 에스컬레이션을 물려받지 않는다
     model = BASE_MODEL
     escalated = False
     last_error_key = None
     verify_used = False
     rounds = 0
+    counters = {"exact_failure": 0, "same_tool_failure": 0, "no_progress": 0}
+    warned = set()
+    stop_reason = None
+    # 진도를 잴 기준 폴더. 목표 하나당 한 번만 정한다.
+    # last_folder를 그대로 쓰면 list_files가 하위 폴더를 조회할 때마다 값이
+    # 바뀌어, 라운드 전후로 '서로 다른 폴더'를 비교하게 된다. 그러면 언제나
+    # "달라졌다"가 나와서 no_progress가 영원히 0이다 (실제로 그 버그가 있었다).
+    watch_folder = None
 
     response = chat(model=model, messages=history, tools=TOOLS)
 
     # ── 에이전트 루프: 도구 요청이 없어질 때까지 반복 ────────────────
-    while rounds < MAX_ROUNDS:
+    while rounds < HARD_CEILING:
         if response.message.tool_calls:
             rounds = rounds + 1
+            watch = watch_folder          # 이번 라운드 내내 같은 폴더를 본다
+            before = world_state(watch)
+            round_failed = []
             print(f"\n── 라운드 {rounds} (모델: {model}) ──")
             history.append(response.message)
 
@@ -202,11 +256,52 @@ while True:
                 print(f"  {name}{dict(args)} → {result}")
                 history.append({"role": "tool", "name": name, "content": result})
 
-                # 같은 도구를 같은 인자로 불렀는데 또 에러 → 7B가 헤매는 중, 전환
-                error_key = (name, tuple(sorted(args.items()))) if result.startswith("에러 발생") else None
-                if error_key is not None and error_key == last_error_key:
-                    escalate("같은 에러 반복")
+                failed = result.startswith("에러 발생") or result.startswith("에러:")
+                error_key = (name, tuple(sorted(args.items()))) if failed else None
+                if failed:
+                    round_failed.append(name)
+                    # 같은 도구를 같은 인자로 불렀는데 또 실패 = 제자리걸음
+                    if error_key == last_error_key:
+                        counters["exact_failure"] += 1
+                        escalate("같은 호출로 반복 실패")
                 last_error_key = error_key
+
+            # ── 병적인 신호를 센다 (라운드 수가 아니라) ──────────────
+            counters["same_tool_failure"] = (
+                counters["same_tool_failure"] + 1 if round_failed else 0)
+
+            # 첫 조회 폴더를 감시 대상으로 고정한다. os.walk가 재귀라
+            # 그 아래 어디가 바뀌어도 잡힌다.
+            if watch_folder is None and last_folder:
+                watch_folder = last_folder
+
+            after = world_state(watch)
+            if before is not None and after == before:
+                # 도구를 불렀는데 폴더가 그대로다. 조회만 반복하는 경우도 여기 걸린다.
+                counters["no_progress"] += 1
+            elif after != before:
+                # 진도가 나갔다. 카운터를 전부 되돌린다.
+                # 이것이 라운드 상한과의 결정적 차이다 — 오래 걸려도 벌하지 않는다.
+                counters = {k: 0 for k in counters}
+                warned.clear()
+
+            # 경고: 끊지 않고 모델에게 알려 방향을 바꿀 기회를 준다
+            NUDGE = {
+                "exact_failure": "같은 도구를 같은 인자로 반복 호출해 계속 실패하고 있다. 인자를 다시 확인하라.",
+                "same_tool_failure": "도구 호출이 연달아 실패하고 있다. list_files로 현재 상태를 먼저 확인하라.",
+                "no_progress": "도구를 불렀지만 폴더 상태가 전혀 변하지 않았다. 조회만 반복하지 말고 실제 작업을 하라.",
+            }
+            for k, v in counters.items():
+                if WARN_AT[k] <= v < STOP_AT[k] and k not in warned:
+                    warned.add(k)
+                    print(f"  [경고] {k} {v}회 — 모델에게 알린다")
+                    history.append({"role": "user", "content": f"[시스템 경고] {NUDGE[k]}"})
+                    escalate(f"{k} {v}회")
+
+            stop_reason = next((f"{k} {v}회" for k, v in counters.items()
+                                if v >= STOP_AT[k]), None)
+            if stop_reason:
+                break
 
             response = chat(model=model, messages=history, tools=TOOLS)
             continue
@@ -227,8 +322,10 @@ while True:
 
         break
 
-    if rounds >= MAX_ROUNDS:
-        print("\n(반복 상한 도달 — 이번 목표는 강제 종료)")
+    if stop_reason:
+        print(f"\n(중단: {stop_reason} — 병적인 반복으로 판단해 끊었다)")
+    elif rounds >= HARD_CEILING:
+        print(f"\n(중단: 라운드 {HARD_CEILING}회 — 최후의 벽에 닿았다)")
 
     history.append(response.message)  # 최종 답도 이력에 남겨야 다음 턴이 기억한다
     print(f"\n봇: {response.message.content}")
